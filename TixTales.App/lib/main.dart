@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tix_tales/src/Constants/app_assets.dart';
+import 'package:tix_tales/src/Constants/app_resources.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +34,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  AppResources myResources = AppResources();
+
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -57,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            Image.asset(AppAssets.loginImage)
           ],
         ),
       ),
