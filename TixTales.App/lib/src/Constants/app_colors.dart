@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const globalPrimary = Color.fromARGB(1, 13, 205, 170);
-  static const globalDark = Color.fromARGB(1, 0, 0, 0);
-  static const typographyGrey = Color.fromARGB(1, 124, 124, 124);
-  static const typographyDark = Color.fromARGB(1, 38, 38, 39);
-  static const typographyBlue = Color.fromARGB(1, 40, 84, 198);
-  static const typographyLight = Color.fromARGB(1, 255, 255, 255);
+  Color globalPrimary = const Color(0xFF0DCDAA);
+  Color globalDark = const Color(0xFF000000);
+  Color typographyGrey = const Color(0xFF7C7C7C);
+  Color typographyDark = const Color(0xFF262627);
+  Color typographyBlue = const Color(0xFF2854C6);
+  Color typographyGlobalLight = const Color(0xFFFFFFFF);
 }
