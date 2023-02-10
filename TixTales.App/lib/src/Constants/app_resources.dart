@@ -4,4 +4,5 @@ import 'package:tix_tales/src/Constants/app_colors.dart';
 class AppResources {
   static AppStyles appStyles = AppStyles();
   static AppColors appColors = AppColors();
+  static ButtonStyles buttonStyles = ButtonStyles();
 }
