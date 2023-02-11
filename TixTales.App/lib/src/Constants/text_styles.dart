@@ -60,6 +60,11 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 12.0,
   );
+  TextStyle bodyTextInput = const TextStyle(
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w400,
+    fontSize: 14.0,
+  );
 
 //componenents text styles
   TextStyle componentsButtonDefault = const TextStyle(

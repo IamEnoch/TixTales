@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
@@ -11,30 +9,26 @@ class OnboardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppResources.appColors.typographyGlobalLight,
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(36.5),
-        child: ListView(
+        child: Column(
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.1,
             ),
-            Center(
-              child: Text(
-                'Welcome!',
-                style: AppResources.appStyles.textStyles.headineH2.copyWith(
-                  color: AppResources.appColors.globalDark,
-                ),
+            Text(
+              'Welcome!',
+              style: AppResources.appStyles.textStyles.headineH2.copyWith(
+                color: AppResources.appColors.globalDark,
               ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.01,
             ),
-            Center(
-              child: Text(
-                'Sing in or create a new account',
-                style: AppResources.appStyles.textStyles.bodyDefault
-                    .copyWith(color: AppResources.appColors.typographyGrey),
-              ),
+            Text(
+              'Sing in or create a new account',
+              style: AppResources.appStyles.textStyles.bodyDefault
+                  .copyWith(color: AppResources.appColors.typographyGrey),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.09,
@@ -51,6 +45,7 @@ class OnboardingView extends StatelessWidget {
             ),
             SizedBox(
               height: 60.0,
+              width: MediaQuery.of(context).size.width,
               child: OutlinedButton(
                 onPressed: () {},
                 style: AppResources.buttonStyles.buttonStyle(
@@ -71,6 +66,7 @@ class OnboardingView extends StatelessWidget {
             ),
             SizedBox(
               height: 60.0,
+              width: MediaQuery.of(context).size.width,
               child: OutlinedButton(
                 onPressed: () {},
                 style: AppResources.buttonStyles.buttonStyle(
