@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tix_tales/views/login_view.dart';
 import 'package:tix_tales/views/onboarding_view.dart';
 import 'package:tix_tales/views/signIn_view.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: const SignInView(),
+      home: const LoginView(),
     );
   }
 }
