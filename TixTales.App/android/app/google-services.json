@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "162366213466",
+    "project_id": "tix-tales",
+    "storage_bucket": "tix-tales.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162366213466:android:7ba751239c8e04de83b763",
+        "android_client_info": {
+          "package_name": "com.example.tix_tales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162366213466-bfctcthuiectl478o7qc2dj50lk4evb3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW1YHYQpkZJ1IqvmiMTMiy3BsmUGWPM8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162366213466-bfctcthuiectl478o7qc2dj50lk4evb3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
