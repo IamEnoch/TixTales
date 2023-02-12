@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tix_tales/views/login_view.dart';
+import 'package:tix_tales/src/Constants/app_resources.dart';
+import 'package:tix_tales/src/Constants/routes.dart';
 import 'package:tix_tales/views/onboarding_view.dart';
-import 'package:tix_tales/views/signIn_view.dart';
+import 'package:tix_tales/views/login_view.dart';
+import 'package:tix_tales/views/signUp_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +19,13 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.teal,
+        scaffoldBackgroundColor: AppResources.appColors.typographyGlobalLight,
       ),
-      home: const LoginView(),
+      home: const OnboardingView(),
+      routes: {
+        signInRoute: (context) => const LoginView(),
+        signUpRoute: (context) => const SignUpView(),
+      },
     );
   }
 }
