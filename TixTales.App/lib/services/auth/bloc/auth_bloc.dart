@@ -12,7 +12,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(state);
     });
 
-    //Even
+    //Event register
     on<AuthEventRegister>(
       (event, emit) async {
         final email = event.email;
@@ -33,7 +33,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
     );
 
-    //Initialize
+    //Initialize auth/app
     on<AuthEventInitialize>(
       ((event, emit) async {
         await provider.initialize();
@@ -96,7 +96,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }),
     );
 
-    //login
+    //Login event
     on<AuthEventLogout>(
       ((event, emit) async {
         try {

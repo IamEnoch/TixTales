@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tix_tales/services/auth/bloc/auth_bloc.dart';
+import 'package:tix_tales/services/auth/firebase/firebase_auth_provider.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 import 'package:tix_tales/src/Constants/routes.dart';
 import 'package:tix_tales/views/onboarding_view.dart';
@@ -15,17 +18,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        scaffoldBackgroundColor: AppResources.appColors.typographyGlobalLight,
+    return BlocProvider(
+      create: (context) => AuthBloc(FirebaseAuthProvider()),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+          scaffoldBackgroundColor: AppResources.appColors.typographyGlobalLight,
+        ),
+        home: const OnboardingView(),
+        routes: {
+          signInRoute: (context) => const LoginView(),
+          signUpRoute: (context) => const SignUpView(),
+        },
       ),
-      home: const OnboardingView(),
-      routes: {
-        signInRoute: (context) => const LoginView(),
-        signUpRoute: (context) => const SignUpView(),
-      },
     );
   }
 }
