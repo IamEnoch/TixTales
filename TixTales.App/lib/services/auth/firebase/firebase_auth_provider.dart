@@ -74,6 +74,7 @@ class FirebaseAuthProvider extends AuthProvider {
       if (user != null) {
         return user;
       } else {
+        print("user not logged in exceptio thrown");
         throw UserNotLoggedInException();
       }
     } on FirebaseAuthException catch (e) {
@@ -84,13 +85,14 @@ class FirebaseAuthProvider extends AuthProvider {
       } else if (e.code == 'user-not-found') {
         throw UserNotFoundException();
       } else {
+        print("The error is ${e.code}");
         throw GenericException();
       }
     }
   }
 
   @override
-  Future<Void> sendEmailVerification() async {
+  Future<void> sendEmailVerification() async {
     final user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
@@ -98,11 +100,10 @@ class FirebaseAuthProvider extends AuthProvider {
     } else {
       throw UserNotLoggedInException();
     }
-    throw GenericException();
   }
 
   @override
-  Future<Void> logOut() async {
+  Future<void> logOut() async {
     final user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
@@ -110,6 +111,5 @@ class FirebaseAuthProvider extends AuthProvider {
     } else {
       throw UserNotLoggedInException();
     }
-    throw GenericException();
   }
 }

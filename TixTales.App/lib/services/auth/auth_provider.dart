@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'auth_user.dart';
 
 //"Interface" for auth provider
@@ -22,8 +20,8 @@ abstract class AuthProvider {
   });
 
   //logout user
-  Future<Void> logOut();
+  Future<void> logOut();
 
   //send email verification
-  Future<Void> sendEmailVerification();
+  Future<void> sendEmailVerification();
 }

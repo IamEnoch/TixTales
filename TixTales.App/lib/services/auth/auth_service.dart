@@ -26,7 +26,7 @@ class AuthService extends AuthProvider {
   Future<void> initialize() => provider.initialize();
 
   @override
-  Future<Void> logOut() => provider.logOut();
+  Future<void> logOut() => provider.logOut();
 
   @override
   Future<AuthUser> login({
@@ -39,5 +39,5 @@ class AuthService extends AuthProvider {
       );
 
   @override
-  Future<Void> sendEmailVerification() => provider.sendEmailVerification();
+  Future<void> sendEmailVerification() => provider.sendEmailVerification();
 }

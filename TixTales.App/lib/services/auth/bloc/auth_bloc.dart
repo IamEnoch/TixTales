@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tix_tales/services/auth/auth_provider.dart';
 import 'package:tix_tales/services/auth/bloc/auth_event.dart';
 import 'package:tix_tales/services/auth/bloc/auth_state.dart';
