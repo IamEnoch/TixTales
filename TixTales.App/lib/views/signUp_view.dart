@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:tix_tales/services/auth/auth_exceptions.dart';
 import 'package:tix_tales/services/auth/bloc/auth_bloc.dart';
 import 'package:tix_tales/services/auth/bloc/auth_event.dart';
 import 'package:tix_tales/services/auth/bloc/auth_state.dart';
-import 'package:tix_tales/services/auth/firebase/firebase_auth_provider.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 
 class SignUpView extends StatefulWidget {
@@ -15,6 +15,7 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
+  String? errorText;
   bool obscureText = true;
   bool showSendEmailVerfification = false;
 
@@ -195,7 +196,7 @@ class _SignUpViewState extends State<SignUpView> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.006,
                   ),
-                  TextField(
+                  TextFormField(
                     controller: fullNameEditingController,
                     enableSuggestions: false,
                     autocorrect: false,
@@ -225,7 +226,7 @@ class _SignUpViewState extends State<SignUpView> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.006,
                   ),
-                  TextField(
+                  TextFormField(
                     controller: emailTextEditingContoller,
                     enableSuggestions: false,
                     autocorrect: false,
@@ -255,12 +256,13 @@ class _SignUpViewState extends State<SignUpView> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.006,
                   ),
-                  TextField(
+                  TextFormField(
                     controller: passwordEditingController,
                     obscureText: obscureText,
                     enableSuggestions: false,
                     autocorrect: false,
                     decoration: InputDecoration(
+                        errorText: errorText,
                         suffixIcon: IconButton(
                           icon: Icon(
                             obscureText
@@ -297,12 +299,18 @@ class _SignUpViewState extends State<SignUpView> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.006,
                   ),
-                  TextField(
+                  TextFormField(
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (val) => errorText =
+                        MatchValidator(errorText: 'passwords do not match')
+                            .validateMatch(repeatPasswordEditingController.text,
+                                passwordEditingController.text),
                     controller: repeatPasswordEditingController,
                     obscureText: obscureText,
                     enableSuggestions: false,
                     autocorrect: false,
                     decoration: InputDecoration(
+                        errorText: errorText,
                         suffixIcon: IconButton(
                           icon: Icon(
                             obscureText

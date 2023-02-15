@@ -17,6 +17,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   bool obscureText = true;
+  bool isBusy = false;
   late TextEditingController emailTextEditingController;
   late TextEditingController passwordTextEditingController;
 
@@ -43,6 +44,8 @@ class _LoginViewState extends State<LoginView> {
               context, homePageRoute, (route) => false);
         }
         if (state is AuthStateLoggedOut) {
+          state.isLoading ? isBusy = true : isBusy = false;
+
           if (state.exception is InvalidEmailException) {
             Fluttertoast.showToast(
               msg: "invalid email",
@@ -188,23 +191,32 @@ class _LoginViewState extends State<LoginView> {
                   width: MediaQuery.of(context).size.width,
                   height: 60.0,
                   child: OutlinedButton(
-                    onPressed: () {
-                      context.read<AuthBloc>().add(
-                            AuthEventLogin(
-                              emailTextEditingController.text,
-                              passwordTextEditingController.text,
-                            ),
-                          );
-                    },
+                    onPressed: isBusy
+                        ? null
+                        : () {
+                            context.read<AuthBloc>().add(
+                                  AuthEventLogin(
+                                    emailTextEditingController.text,
+                                    passwordTextEditingController.text,
+                                  ),
+                                );
+                          },
                     style: AppResources.buttonStyles.buttonStyle(
                       backgroundColor: AppResources.appColors.globalPrimary,
                     ),
-                    child: Text(
-                      'Sign in',
-                      style: AppResources
-                          .appStyles.textStyles.componentsButtonDefault
-                          .copyWith(
+                    child: Visibility(
+                      visible: !isBusy,
+                      replacement: CircularProgressIndicator(
+                        value: 10.0,
                         color: AppResources.appColors.typographyGlobalLight,
+                      ),
+                      child: Text(
+                        'Sign in',
+                        style: AppResources
+                            .appStyles.textStyles.componentsButtonDefault
+                            .copyWith(
+                          color: AppResources.appColors.typographyGlobalLight,
+                        ),
                       ),
                     ),
                   ),
