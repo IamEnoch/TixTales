@@ -16,6 +16,7 @@ class SignUpView extends StatefulWidget {
 
 class _SignUpViewState extends State<SignUpView> {
   bool obscureText = true;
+  bool showSendEmailVerfification = false;
 
   //Text controllers
   late TextEditingController emailTextEditingContoller;
@@ -89,6 +90,9 @@ class _SignUpViewState extends State<SignUpView> {
             );
           }
           if (state is AuthStateNeedVerirfication) {
+            setState(() {
+              showSendEmailVerfification = true;
+            });
             return showDialog(
               context: context,
               builder: (context) {
@@ -345,6 +349,19 @@ class _SignUpViewState extends State<SignUpView> {
                             .copyWith(
                           color: AppResources.appColors.typographyGlobalLight,
                         ),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Visibility(
+                      visible: showSendEmailVerfification,
+                      child: TextButton(
+                        onPressed: () {
+                          context
+                              .read<AuthBloc>()
+                              .add(const AuthEventSendEmailVerification());
+                        },
+                        child: const Text('Send email verification'),
                       ),
                     ),
                   ),
