@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tix_tales/services/auth/auth_exceptions.dart';
 import 'package:tix_tales/services/auth/bloc/auth_bloc.dart';
 import 'package:tix_tales/services/auth/bloc/auth_event.dart';
 import 'package:tix_tales/services/auth/bloc/auth_state.dart';
@@ -39,6 +41,49 @@ class _LoginViewState extends State<LoginView> {
         if (state is AuthStateLoggedIn) {
           Navigator.pushNamedAndRemoveUntil(
               context, homePageRoute, (route) => false);
+        }
+        if (state is AuthStateLoggedOut) {
+          if (state.exception is InvalidEmailException) {
+            Fluttertoast.showToast(
+              msg: "invalid email",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 1,
+              backgroundColor: AppResources.appColors.typographyGrey,
+              textColor: AppResources.appColors.globalDark,
+              fontSize: 16.0,
+            );
+          } else if (state.exception is WrongPasswordException) {
+            Fluttertoast.showToast(
+              msg: "Wrong password",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+          } else if (state.exception is UserNotFoundException) {
+            Fluttertoast.showToast(
+              msg: "User not found",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+          } else if (state.exception is GenericException) {
+            Fluttertoast.showToast(
+              msg: "Generic exception",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+          }
         }
       },
       child: Scaffold(
