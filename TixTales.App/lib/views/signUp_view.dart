@@ -217,7 +217,7 @@ class _SignUpViewState extends State<SignUpView> {
                     height: MediaQuery.of(context).size.height * 0.034,
                   ),
                   Text(
-                    'Email adress',
+                    'Email address',
                     style: AppResources.appStyles.textStyles.bodyDefaultBold
                         .copyWith(
                       color: AppResources.appColors.typographyGrey,
