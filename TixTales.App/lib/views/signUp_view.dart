@@ -290,7 +290,7 @@ class _SignUpViewState extends State<SignUpView> {
                     height: MediaQuery.of(context).size.height * 0.034,
                   ),
                   Text(
-                    'Repet password',
+                    'Repeat password',
                     style: AppResources.appStyles.textStyles.bodyDefaultBold
                         .copyWith(
                       color: AppResources.appColors.typographyGrey,
