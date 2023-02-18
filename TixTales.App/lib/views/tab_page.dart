@@ -4,10 +4,9 @@ import 'package:tix_tales/services/auth/bloc/auth_bloc.dart';
 import 'package:tix_tales/services/auth/bloc/auth_event.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 import 'package:tix_tales/src/Constants/routes.dart';
-import 'package:tix_tales/views/onboarding_view.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class TabbedPage extends StatelessWidget {
+  const TabbedPage({super.key});
 
   @override
   Widget build(BuildContext context) {

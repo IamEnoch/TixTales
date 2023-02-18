@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           final Widget startPage;
           if (state is AuthStateLoggedIn) {
-            startPage = const HomePage();
+            startPage = const TabbedPage();
           } else if (state is AuthStateLoggedOut) {
             startPage = const OnboardingView();
           } else if (state is AuthStateRegistering) {
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
               onboardingRoute: (context) => const OnboardingView(),
               signInRoute: (context) => const LoginView(),
               signUpRoute: (context) => const SignUpView(),
-              homePageRoute: (context) => const HomePage(),
+              homePageRoute: (context) => const TabbedPage(),
             },
           );
         },
