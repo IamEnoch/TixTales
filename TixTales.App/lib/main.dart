@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tix_tales/services/auth/bloc/auth_bloc.dart';
 import 'package:tix_tales/services/auth/bloc/auth_state.dart';
 import 'package:tix_tales/services/auth/firebase/firebase_auth_provider.dart';
-import 'package:tix_tales/src/Constants/app_resources.dart';
 import 'package:tix_tales/src/Constants/routes.dart';
-import 'package:tix_tales/views/tab_page.dart';
+import 'package:tix_tales/views/home_page.dart';
 import 'package:tix_tales/views/onboarding_view.dart';
 import 'package:tix_tales/views/login_view.dart';
 import 'package:tix_tales/views/signUp_view.dart';
+import 'package:tix_tales/views/tab_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           final Widget startPage;
           if (state is AuthStateLoggedIn) {
-            startPage = const TabbedPage();
+            startPage = const HomePage();
           } else if (state is AuthStateLoggedOut) {
             startPage = const OnboardingView();
           } else if (state is AuthStateRegistering) {
@@ -45,7 +45,8 @@ class MyApp extends StatelessWidget {
               onboardingRoute: (context) => const OnboardingView(),
               signInRoute: (context) => const LoginView(),
               signUpRoute: (context) => const SignUpView(),
-              homePageRoute: (context) => const TabbedPage(),
+              homePageRoute: (context) => const HomePage(),
+              tabPageRoute: (context) => const TabPage(),
             },
           );
         },

@@ -41,7 +41,7 @@ class _LoginViewState extends State<LoginView> {
       listener: (context, state) {
         if (state is AuthStateLoggedIn) {
           Navigator.pushNamedAndRemoveUntil(
-              context, homePageRoute, (route) => false);
+              context, tabPageRoute, (route) => false);
         }
         if (state is AuthStateLoggedOut) {
           state.isLoading ? isBusy = true : isBusy = false;
