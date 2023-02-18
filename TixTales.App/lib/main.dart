@@ -38,8 +38,7 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             theme: ThemeData(
               primarySwatch: Colors.teal,
-              scaffoldBackgroundColor:
-                  AppResources.appColors.typographyGlobalLight,
+              scaffoldBackgroundColor: Colors.white,
             ),
             home: startPage,
             routes: {
