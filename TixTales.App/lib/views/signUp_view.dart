@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:tix_tales/services/auth/auth_exceptions.dart';
 import 'package:tix_tales/services/auth/bloc/auth_bloc.dart';
@@ -51,107 +52,62 @@ class _SignUpViewState extends State<SignUpView> {
     return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
           if (state is AuthStateUninitialized) {
-            return showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: const Text('Alert'),
-                  content: const Text('The state is uninitialized'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        // Close the dialog
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                );
-              },
+            Fluttertoast.showToast(
+              msg: "The state is uninitialized",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 1,
+              backgroundColor: AppResources.appColors.typographyGrey,
+              textColor: AppResources.appColors.globalDark,
+              fontSize: 16.0,
             );
           }
           if (state is AuthStateRegistering) {
-            return showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: const Text('Alert'),
-                  content: const Text('The state is registering'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        // Close the dialog
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                );
-              },
+            Fluttertoast.showToast(
+              msg: "The state is registering",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 1,
+              backgroundColor: AppResources.appColors.typographyGrey,
+              textColor: AppResources.appColors.globalDark,
+              fontSize: 16.0,
             );
           }
           if (state is AuthStateNeedVerirfication) {
             setState(() {
               showSendEmailVerfification = true;
             });
-            return showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: const Text('Alert'),
-                  content: const Text('The state is need verification'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        // Close the dialog
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                );
-              },
+            Fluttertoast.showToast(
+              msg: "The state needs verification",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 1,
+              backgroundColor: AppResources.appColors.typographyGrey,
+              textColor: AppResources.appColors.globalDark,
+              fontSize: 16.0,
             );
           }
           if (state is AuthStateLoggedIn) {
-            return showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: const Text('Alert'),
-                  content: const Text('The state is logged in'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        // Close the dialog
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                );
-              },
+            Fluttertoast.showToast(
+              msg: "The state is logged in",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 1,
+              backgroundColor: AppResources.appColors.typographyGrey,
+              textColor: AppResources.appColors.globalDark,
+              fontSize: 16.0,
             );
           }
           if (state is AuthStateLoggedOut) {
             if (state.exception is GenericException) {
-              return showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('Alert'),
-                    content: const Text('This is an alert dialog.'),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          // Close the dialog
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  );
-                },
+              Fluttertoast.showToast(
+                msg: "This is an alert (Generic exception)",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.SNACKBAR,
+                timeInSecForIosWeb: 1,
+                backgroundColor: AppResources.appColors.typographyGrey,
+                textColor: AppResources.appColors.globalDark,
+                fontSize: 16.0,
               );
             }
           }
