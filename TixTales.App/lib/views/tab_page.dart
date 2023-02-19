@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tix_tales/services/auth/bloc/auth_bloc.dart';
 import 'package:tix_tales/services/auth/bloc/auth_event.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
-import 'package:tix_tales/src/Constants/app_colors.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 import 'package:tix_tales/src/Constants/routes.dart';
+import 'package:tix_tales/views/home_page.dart';
 
 class TabPage extends StatefulWidget {
   const TabPage({super.key});
@@ -50,7 +50,7 @@ class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
               child: const Text('Logout'),
             ),
           ),
-          const Center(child: Text("This is business view")),
+          const Center(child: HomePage()),
           const Center(child: Text("This is school view")),
           const Center(child: Text("This is business view")),
           const Center(child: Text("This is school view")),
