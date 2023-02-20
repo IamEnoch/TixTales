@@ -65,6 +65,64 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 30.5),
               Text('Popular in $selectedValue'),
+              const SizedBox(height: 19.6),
+              Card(
+                elevation: 2,
+                clipBehavior: Clip.antiAlias,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                margin: EdgeInsets.zero,
+                child: InkWell(
+                  onTap: () {},
+                  child: Stack(
+                    alignment: AlignmentDirectional.bottomCenter,
+                    children: [
+                      const Image(
+                        image: AssetImage(AppAssets.testImage),
+                        fit: BoxFit.scaleDown,
+                      ),
+                      Container(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            11.7, 12.7, 13, 13.6),
+                        height: 112,
+                        color: AppResources.appColors.globalGrey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('time',
+                                style: AppResources
+                                    .appStyles.textStyles.bodySmall),
+                            const SizedBox(height: 6),
+                            Text('Name',
+                                style: AppResources
+                                    .appStyles.textStyles.bodyDefaultBold),
+                            const SizedBox(height: 6),
+                            Text('Time',
+                                style: AppResources
+                                    .appStyles.textStyles.bodySmall),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                ImageIcon(
+                                  const AssetImage(AppAssets.heartIcon),
+                                  color: AppResources.appColors.typographyGrey,
+                                  size: 18,
+                                ),
+                                const SizedBox(width: 17),
+                                ImageIcon(
+                                  const AssetImage(AppAssets.shareIcon),
+                                  color: AppResources.appColors.typographyGrey,
+                                  size: 18,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
