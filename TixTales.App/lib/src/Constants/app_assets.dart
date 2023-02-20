@@ -18,4 +18,5 @@ class AppAssets {
   static const String shoppingBagIcon = "assets/images/shoppingBagIcon.png";
   static const String ticketIcon = "assets/images/ticketIcon.png";
   static const String userIcon = "assets/images/userIcon.png";
+  static const String testImage = "assets/images/testImage.png";
 }
