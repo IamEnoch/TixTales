@@ -103,16 +103,19 @@ class _HomePageState extends State<HomePage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                ImageIcon(
-                                  const AssetImage(AppAssets.heartIcon),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.favorite),
                                   color: AppResources.appColors.typographyGrey,
-                                  size: 18,
+                                  padding: const EdgeInsets.all(0),
+                                  iconSize: 10,
                                 ),
                                 const SizedBox(width: 17),
-                                ImageIcon(
-                                  const AssetImage(AppAssets.shareIcon),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.share),
                                   color: AppResources.appColors.typographyGrey,
-                                  size: 18,
+                                  iconSize: 10,
                                 ),
                               ],
                             ),
@@ -120,6 +123,37 @@ class _HomePageState extends State<HomePage> {
                         ),
                       )
                     ],
+                  ),
+                ),
+              ),
+              Card(
+                margin: const EdgeInsets.all(0),
+                clipBehavior: Clip.antiAlias,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                child: InkWell(
+                  onTap: () {},
+                  child: SizedBox(
+                    width: 360,
+                    height: 84,
+                    child: Row(
+                      children: [
+                        Ink.image(
+                          image: const AssetImage(AppAssets.testImage),
+                          width: 89,
+                          height: 84,
+                          fit: BoxFit.cover,
+                        ),
+                        Column(
+                          children: const [
+                            Text("data"),
+                            Text("data"),
+                            Text("data")
+                          ],
+                        ),
+                        Column()
+                      ],
+                    ),
                   ),
                 ),
               )
