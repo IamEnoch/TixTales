@@ -144,14 +144,43 @@ class _HomePageState extends State<HomePage> {
                           height: 84,
                           fit: BoxFit.cover,
                         ),
-                        Column(
-                          children: const [
-                            Text("data"),
-                            Text("data"),
-                            Text("data")
-                          ],
+                        Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(10.0, 5.53, 0, 5.53),
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            width: 185,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text("data"),
+                                Text("data"),
+                                Text("data")
+                              ],
+                            ),
+                          ),
                         ),
-                        Column()
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.favorite),
+                              color: AppResources.appColors.typographyGrey,
+                              padding: const EdgeInsets.all(0),
+                              iconSize: 18,
+                            ),
+                            SizedBox(
+                                width:
+                                    MediaQuery.of(context).size.width * 0.04),
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.share),
+                              color: AppResources.appColors.typographyGrey,
+                              iconSize: 18,
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
