@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:tix_tales/services/auth/auth_provider.dart';
 import 'package:tix_tales/services/auth/auth_user.dart';
 import 'package:tix_tales/services/auth/firebase/firebase_auth_provider.dart';
