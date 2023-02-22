@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tix_tales/services/auth/bloc/auth_bloc.dart';
-import 'package:tix_tales/services/auth/bloc/auth_event.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
-import 'package:tix_tales/src/Constants/routes.dart';
 import 'package:tix_tales/views/home_page.dart';
 
 class TabPage extends StatefulWidget {
@@ -14,91 +10,109 @@ class TabPage extends StatefulWidget {
   State<TabPage> createState() => _TabPageState();
 }
 
-class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
-  //Tab controller => ensure the selected tab and content sections are
-  //in sync
+class _TabPageState extends State<TabPage> {
+  int _selectedIndex = 0;
 
-  late final TabController _tabController;
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
+    HomePage(),
+    HomePage(),
+    HomePage(),
+    HomePage(),
+  ];
 
-  @override
-  void initState() {
-    _tabController = TabController(length: 5, vsync: this);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          Center(
-            child: TextButton(
-              onPressed: () {
-                context.read<AuthBloc>().add(
-                      const AuthEventLogout(),
-                    );
-                Navigator.pushNamedAndRemoveUntil(
-                    context, onboardingRoute, (route) => false);
-              },
-              child: const Text('Logout'),
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              AppAssets.homeIcon,
+              color: AppResources.appColors.globalDark,
+              width: 24.0,
+              height: 26.3,
             ),
-          ),
-          const Center(child: HomePage()),
-          const Center(child: Text("This is school view")),
-          const Center(child: Text("This is business view")),
-          const Center(child: Text("This is school view")),
-        ],
-      ),
-      bottomNavigationBar: Material(
-        color: AppResources.appColors.globalGrey,
-        child: TabBar(
-          padding: const EdgeInsets.all(10.0),
-          controller: _tabController,
-          tabs: [
-            Tab(
-                icon: Image.asset(
+            icon: Image.asset(
               AppAssets.homeIcon,
               color: AppResources.appColors.iconGrey,
               width: 24.0,
               height: 26.3,
-            )),
-            Tab(
-                icon: Image.asset(
+            ),
+            label: 'Screen 1',
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              AppAssets.searchIcon,
+              color: AppResources.appColors.globalDark,
+              width: 24.0,
+              height: 26.3,
+            ),
+            icon: Image.asset(
               AppAssets.searchIcon,
               color: AppResources.appColors.iconGrey,
               width: 24.0,
               height: 26.3,
-            )),
-            Tab(
-                icon: Image.asset(
+            ),
+            label: 'Screen 2',
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              AppAssets.ticketIcon,
+              color: AppResources.appColors.globalDark,
+              width: 24.0,
+              height: 26.3,
+            ),
+            icon: Image.asset(
               AppAssets.ticketIcon,
               color: AppResources.appColors.iconGrey,
               width: 24.0,
               height: 26.3,
-            )),
-            Tab(
-                icon: Image.asset(
+            ),
+            label: 'Screen 3',
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              AppAssets.heartIcon,
+              color: AppResources.appColors.globalDark,
+              width: 24.0,
+              height: 26.3,
+            ),
+            icon: Image.asset(
               AppAssets.heartIcon,
               color: AppResources.appColors.iconGrey,
               width: 24.0,
               height: 26.3,
-            )),
-            Tab(
-                icon: Image.asset(
+            ),
+            label: 'Screen 3',
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              AppAssets.userIcon,
+              color: AppResources.appColors.globalDark,
+              width: 24.0,
+              height: 26.3,
+            ),
+            icon: Image.asset(
               AppAssets.userIcon,
               color: AppResources.appColors.iconGrey,
               width: 24.0,
               height: 26.3,
-            )),
-          ],
-        ),
+            ),
+            label: 'Screen 3',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }
