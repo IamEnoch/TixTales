@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           final Widget startPage;
           if (state is AuthStateLoggedIn) {
-            startPage = const HomePage();
+            startPage = const TabPage();
           } else if (state is AuthStateLoggedOut) {
             startPage = const OnboardingView();
           } else if (state is AuthStateRegistering) {
