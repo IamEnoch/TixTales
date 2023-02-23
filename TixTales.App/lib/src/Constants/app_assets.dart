@@ -1,6 +1,6 @@
 class AppAssets {
   static const String leftArrowIcon = "assets/images/arrowLeftIcon.png";
-  static const String calenderIcon = "assets/images/calenderIcon.png";
+  static const String calendarIcon = "assets/images/calendarIcon.png";
   static const String cancelIcon = "assets/images/calenderIcon.png";
   static const String dropDownIcon = "assets/images/chevronDownIcon.png";
   static const String moveRightIcon = "assets/images/chevronRightIcon.png";

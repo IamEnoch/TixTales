@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
+import 'package:tix_tales/src/Constants/routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -200,7 +201,9 @@ class MySmallCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pushNamed(singleEventPage);
+        },
         child: SizedBox(
           width: 360,
           height: 84,
