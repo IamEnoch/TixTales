@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tix_tales/services/auth/bloc/auth_bloc.dart';
+import 'package:tix_tales/services/auth/bloc/auth_event.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
+import 'package:tix_tales/src/Constants/routes.dart';
 import 'package:tix_tales/views/home_page.dart';
 
 class TabPage extends StatefulWidget {
@@ -18,7 +22,7 @@ class _TabPageState extends State<TabPage> {
     HomePage(),
     HomePage(),
     HomePage(),
-    HomePage(),
+    CheckPage()
   ];
 
   void _onItemTapped(int index) {
@@ -113,6 +117,28 @@ class _TabPageState extends State<TabPage> {
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class CheckPage extends StatelessWidget {
+  const CheckPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: TextButton(
+          onPressed: () {
+            context.read<AuthBloc>().add(
+                  const AuthEventLogout(),
+                );
+            Navigator.pushNamedAndRemoveUntil(
+                context, onboardingRoute, (route) => false);
+          },
+          child: const Text('Logout'),
+        ),
       ),
     );
   }
