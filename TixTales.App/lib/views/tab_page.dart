@@ -6,7 +6,6 @@ import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 import 'package:tix_tales/src/Constants/routes.dart';
 import 'package:tix_tales/views/home_page.dart';
-import 'package:tix_tales/views/single_event_view.dart';
 
 class TabPage extends StatefulWidget {
   const TabPage({super.key});
