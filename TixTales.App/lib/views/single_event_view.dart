@@ -195,7 +195,7 @@ class _SingleEventPageState extends State<SingleEventPage> {
                                   height: 7,
                                 ),
                                 Text(
-                                  '21:00 Pm - 23.30 Pm',
+                                  '21:00 Pm - 23:30 Pm',
                                   style: AppResources
                                       .appStyles.textStyles.bodySmall
                                       .copyWith(
