@@ -97,7 +97,7 @@ class _TabPageState extends State<TabPage> {
               width: 24.0,
               height: 26.3,
             ),
-            label: 'Screen 3',
+            label: 'Screen 4',
           ),
           BottomNavigationBarItem(
             activeIcon: Image.asset(
@@ -112,7 +112,7 @@ class _TabPageState extends State<TabPage> {
               width: 24.0,
               height: 26.3,
             ),
-            label: 'Screen 3',
+            label: 'Screen 5',
           ),
         ],
         currentIndex: _selectedIndex,
