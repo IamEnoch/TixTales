@@ -45,23 +45,25 @@ class _SingleEventPageState extends State<SingleEventPage> {
                   )
                 ],
               ),
-              const SizedBox(
-                width: 65,
-              ),
               SizedBox(
-                width: 189,
-                height: 44,
-                child: OutlinedButton(
-                  onPressed: () {},
-                  style: AppResources.buttonStyles.buttonStyle(
-                    backgroundColor: AppResources.appColors.globalPrimary,
-                  ),
-                  child: Text(
-                    'Tickets',
-                    style: AppResources
-                        .appStyles.textStyles.componentsButtonDefault
-                        .copyWith(
-                      color: AppResources.appColors.typographyGlobalLight,
+                width: MediaQuery.of(context).size.width * 0.16,
+              ),
+              Expanded(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.48,
+                  height: MediaQuery.of(context).size.width * 0.39,
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    style: AppResources.buttonStyles.buttonStyle(
+                      backgroundColor: AppResources.appColors.globalPrimary,
+                    ),
+                    child: Text(
+                      'Tickets',
+                      style: AppResources
+                          .appStyles.textStyles.componentsButtonDefault
+                          .copyWith(
+                        color: AppResources.appColors.typographyGlobalLight,
+                      ),
                     ),
                   ),
                 ),
@@ -78,7 +80,7 @@ class _SingleEventPageState extends State<SingleEventPage> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Stack(
-                    alignment: Alignment.bottomLeft,
+                    alignment: Alignment.bottomCenter,
                     fit: StackFit.passthrough,
                     children: [
                       const Image(
@@ -87,9 +89,10 @@ class _SingleEventPageState extends State<SingleEventPage> {
                       ),
                       Container(
                         margin: const EdgeInsetsDirectional.fromSTEB(
-                            9, 0, 15, 17.5),
+                            15, 0, 6, 17.5),
                         width: MediaQuery.of(context).size.width,
                         child: Row(
+                          //mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             //back button icon
                             IconButton(
@@ -108,8 +111,8 @@ class _SingleEventPageState extends State<SingleEventPage> {
                               ),
                               iconSize: 24,
                             ),
-                            const SizedBox(
-                              width: 308,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.73,
                             ),
                             //favourite icon button
                             IconButton(
@@ -125,10 +128,10 @@ class _SingleEventPageState extends State<SingleEventPage> {
                                 width: 24.0,
                                 height: 26.3,
                               ),
-                              iconSize: 24,
+                              iconSize: 21,
                             ),
-                            const SizedBox(
-                              width: 17,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.04,
                             ),
                             //share icon button
                             IconButton(
@@ -144,8 +147,8 @@ class _SingleEventPageState extends State<SingleEventPage> {
                                 width: 24.0,
                                 height: 26.3,
                               ),
-                              iconSize: 26,
-                            ),
+                              iconSize: 21,
+                            )
                           ],
                         ),
                       )
