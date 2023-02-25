@@ -81,7 +81,9 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10)),
                 margin: EdgeInsets.zero,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(singleEventPage);
+                  },
                   child: SizedBox(
                     height: 230,
                     child: Column(
@@ -105,7 +107,8 @@ class _HomePageState extends State<HomePage> {
                             //color: AppResources.appColors.globalGrey,
                             children: [
                               Container(
-                                width: 288,
+                                width:
+                                    MediaQuery.of(context).size.width * 0.701,
                                 alignment: Alignment.topLeft,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +131,6 @@ class _HomePageState extends State<HomePage> {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     IconButton(
                                       alignment: Alignment.center,
@@ -144,7 +146,10 @@ class _HomePageState extends State<HomePage> {
                                       padding: const EdgeInsets.all(0),
                                       iconSize: 20,
                                     ),
-                                    const SizedBox(width: 27),
+                                    SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.055),
                                     IconButton(
                                       alignment: Alignment.center,
                                       constraints: const BoxConstraints(
@@ -204,9 +209,9 @@ class MySmallCard extends StatelessWidget {
         onTap: () {
           Navigator.of(context).pushNamed(singleEventPage);
         },
-        child: SizedBox(
-          width: 360,
-          height: 84,
+        child: Flexible(
+          // width: MediaQuery.of(context).size.width,
+          // height: 84,
           child: Row(
             children: [
               Ink.image(
@@ -219,7 +224,7 @@ class MySmallCard extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(10, 5.53, 4, 5.53),
                 child: Container(
                   alignment: Alignment.topLeft,
-                  width: 185,
+                  width: MediaQuery.of(context).size.width * 0.47,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -246,43 +251,45 @@ class MySmallCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 12,
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.003,
               ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  IconButton(
-                    alignment: Alignment.center,
-                    constraints:
-                        const BoxConstraints(maxHeight: 25, maxWidth: 25),
-                    onPressed: () {},
-                    icon: Image.asset(
-                      AppAssets.heartIcon,
-                      color: AppResources.appColors.iconGrey,
+              Container(
+                alignment: Alignment.centerRight,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      alignment: Alignment.center,
+                      constraints:
+                          const BoxConstraints(maxHeight: 25, maxWidth: 25),
+                      onPressed: () {},
+                      icon: Image.asset(
+                        AppAssets.heartIcon,
+                        color: AppResources.appColors.iconGrey,
+                      ),
+                      color: AppResources.appColors.typographyGrey,
+                      padding: const EdgeInsets.all(0),
+                      iconSize: 20,
                     ),
-                    color: AppResources.appColors.typographyGrey,
-                    padding: const EdgeInsets.all(0),
-                    iconSize: 20,
-                  ),
-                  const SizedBox(width: 27),
-                  IconButton(
-                    alignment: Alignment.center,
-                    constraints:
-                        const BoxConstraints(maxHeight: 25, maxWidth: 25),
-                    padding: const EdgeInsets.all(0),
-                    onPressed: () {},
-                    icon: Image.asset(
-                      AppAssets.shareIcon,
-                      color: AppResources.appColors.iconGrey,
-                      width: 24.0,
-                      height: 26.3,
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.055),
+                    IconButton(
+                      alignment: Alignment.center,
+                      constraints:
+                          const BoxConstraints(maxHeight: 25, maxWidth: 25),
+                      padding: const EdgeInsets.all(0),
+                      onPressed: () {},
+                      icon: Image.asset(
+                        AppAssets.shareIcon,
+                        color: AppResources.appColors.iconGrey,
+                        width: 24.0,
+                        height: 26.3,
+                      ),
+                      color: AppResources.appColors.typographyGrey,
+                      iconSize: 21,
                     ),
-                    color: AppResources.appColors.typographyGrey,
-                    iconSize: 21,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
