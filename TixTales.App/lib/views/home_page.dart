@@ -25,14 +25,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder<Iterable<Event>>(
+      body: StreamBuilder<Iterable<AppEvent>>(
           stream: _eventsService.allEvents(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
               case ConnectionState.active:
                 if (snapshot.hasData) {
-                  final Iterable<Event>? allEvents = snapshot.data;
+                  final Iterable<AppEvent>? allEvents = snapshot.data;
                   if (allEvents != null) {
                     print('Events: is full of info');
                     print('Events: ${allEvents.elementAt(3).eventName}');
@@ -121,8 +121,9 @@ class _HomePageState extends State<HomePage> {
                                             child: ClipRect(
                                               child: Ink.image(
                                                 alignment: Alignment.topCenter,
-                                                image: const AssetImage(
-                                                    AppAssets.testImage),
+                                                image: NetworkImage(allEvents
+                                                    .elementAt(0)
+                                                    .thumbNail!),
                                                 fit: BoxFit.fitWidth,
                                               ),
                                             ),
@@ -254,15 +255,7 @@ class _HomePageState extends State<HomePage> {
                                         margin: const EdgeInsets.fromLTRB(
                                             0, 0, 0, 20),
                                         child: MySmallCard(
-                                          eventName: allEvents
-                                              .elementAt(index + 1)
-                                              .eventName!,
-                                          eventDate: allEvents
-                                              .elementAt(index + 1)
-                                              .eventDate!,
-                                          eventLocation: allEvents
-                                              .elementAt(index + 1)
-                                              .location!,
+                                          event: allEvents.elementAt(index + 1),
                                         ),
                                       );
                                     })
@@ -286,14 +279,10 @@ class _HomePageState extends State<HomePage> {
 }
 
 class MySmallCard extends StatelessWidget {
-  final String eventDate;
-  final String eventName;
-  final String eventLocation;
+  final AppEvent event;
   const MySmallCard({
     super.key,
-    required this.eventName,
-    required this.eventDate,
-    required this.eventLocation,
+    required this.event,
   });
 
   @override
@@ -309,7 +298,7 @@ class MySmallCard extends StatelessWidget {
         child: Row(
           children: [
             Ink.image(
-              image: const AssetImage(AppAssets.testImage),
+              image: NetworkImage(event.thumbNail!),
               width: 89,
               height: 84,
               fit: BoxFit.cover,
@@ -323,21 +312,21 @@ class MySmallCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      eventDate,
+                      event.eventDate!,
                       style: AppResources.appStyles.textStyles.bodySmall,
                     ),
                     const SizedBox(
                       height: 3,
                     ),
                     Text(
-                      eventName,
+                      event.eventName!,
                       style: AppResources.appStyles.textStyles.bodyDefaultBold,
                     ),
                     const SizedBox(
                       height: 9,
                     ),
                     Text(
-                      eventLocation,
+                      event.location!,
                       style: AppResources.appStyles.textStyles.bodySmall,
                     )
                   ],
