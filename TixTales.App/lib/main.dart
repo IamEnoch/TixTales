@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.teal,
               scaffoldBackgroundColor: Colors.white,
             ),
+            debugShowCheckedModeBanner: false,
             home: startPage,
             routes: {
               onboardingRoute: (context) => const OnboardingView(),
