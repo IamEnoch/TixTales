@@ -25,7 +25,7 @@ String desiredDate(String inputDateString) {
   return dateString;
 }
 
-class Event {
+class AppEvent {
   final String? documentId;
   final String? eventId;
   final String? eventName;
@@ -35,7 +35,7 @@ class Event {
   final String? eventDate;
   final List<PriceCategory>? price;
 
-  Event({
+  AppEvent({
     required this.documentId,
     required this.eventId,
     required this.eventName,
@@ -47,7 +47,7 @@ class Event {
   });
 
   //Creating and instance of cloudnote from from snapshot
-  factory Event.fromSnapshot(
+  factory AppEvent.fromSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot) {
     List<dynamic> dynamicList = snapshot.data()['price'];
     List<PriceCategory> myPriceList =
@@ -56,12 +56,12 @@ class Event {
 
     String changedDate = desiredDate(snapshot.data()['eventDate']);
 
-    return Event(
+    return AppEvent(
       documentId: snapshot.id,
       eventId: snapshot.data()['eventId'],
       eventName: snapshot.data()['eventName'],
       location: snapshot.data()['location'],
-      thumbNail: snapshot.data()['thumbNail'],
+      thumbNail: snapshot.data()['thumbnail'],
       about: snapshot.data()['about'],
       eventDate: changedDate,
       price: myPriceList,

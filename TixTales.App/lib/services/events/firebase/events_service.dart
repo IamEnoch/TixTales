@@ -6,20 +6,20 @@ class EventsService {
   final events = FirebaseFirestore.instance.collection('events');
 
   //snapshots updates all the changes that are happening live from the notes
-  Stream<Iterable<Event>> allEvents() {
+  Stream<Iterable<AppEvent>> allEvents() {
     return events.snapshots().map(
           (event) => event.docs.map(
-            (doc) => Event.fromSnapshot(doc),
+            (doc) => AppEvent.fromSnapshot(doc),
           ),
         );
   }
 
   //getting events by user
-  Future<Iterable<Event>> getNotes() async {
+  Future<Iterable<AppEvent>> getNotes() async {
     try {
       return await events
           .get()
-          .then((value) => value.docs.map((doc) => Event.fromSnapshot(doc)));
+          .then((value) => value.docs.map((doc) => AppEvent.fromSnapshot(doc)));
     } catch (e) {
       throw CouldNotGetAllEventsException();
     }
