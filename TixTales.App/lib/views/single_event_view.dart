@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
+import 'package:tix_tales/services/events/firebase/event.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 
 class SingleEventPage extends StatefulWidget {
-  const SingleEventPage({super.key});
+  const SingleEventPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<SingleEventPage> createState() => _SingleEventPageState();
@@ -14,6 +16,9 @@ class SingleEventPage extends StatefulWidget {
 class _SingleEventPageState extends State<SingleEventPage> {
   @override
   Widget build(BuildContext context) {
+    //Read the arguments that contains the event
+    final AppEvent event =
+        ModalRoute.of(context)?.settings.arguments as AppEvent;
     final screenHeight = MediaQuery.of(context).size.height;
     const bottomSheetHeight = 87.0;
     final maxScrollViewHeight = screenHeight - bottomSheetHeight;
@@ -83,8 +88,8 @@ class _SingleEventPageState extends State<SingleEventPage> {
                     alignment: Alignment.bottomCenter,
                     fit: StackFit.passthrough,
                     children: [
-                      const Image(
-                        image: AssetImage(AppAssets.testImage),
+                      Image(
+                        image: NetworkImage(event.thumbNail!),
                         fit: BoxFit.cover,
                       ),
                       Container(
@@ -165,7 +170,7 @@ class _SingleEventPageState extends State<SingleEventPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'La Rosalia',
+                        event.eventName!,
                         style: AppResources.appStyles.textStyles.headineH4
                             .copyWith(
                           color: AppResources.appColors.globalDark,
@@ -186,7 +191,7 @@ class _SingleEventPageState extends State<SingleEventPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Mon, Apr 18 · 21:00 Pm',
+                                  event.eventDate!,
                                   style: AppResources
                                       .appStyles.textStyles.bodyDefaultBold
                                       .copyWith(
@@ -198,7 +203,7 @@ class _SingleEventPageState extends State<SingleEventPage> {
                                   height: 7,
                                 ),
                                 Text(
-                                  '21:00 Pm - 23:30 Pm',
+                                  event.eventDate!,
                                   style: AppResources
                                       .appStyles.textStyles.bodySmall
                                       .copyWith(
@@ -229,7 +234,7 @@ class _SingleEventPageState extends State<SingleEventPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Palau Sant Jordi',
+                                  event.location!,
                                   style: AppResources
                                       .appStyles.textStyles.bodyDefaultBold
                                       .copyWith(
@@ -241,7 +246,7 @@ class _SingleEventPageState extends State<SingleEventPage> {
                                   height: 7,
                                 ),
                                 Text(
-                                  'Passeig Olímpic, 5-7, 08038 Barcelona',
+                                  event.location!,
                                   style: AppResources
                                       .appStyles.textStyles.bodySmall
                                       .copyWith(
@@ -272,7 +277,7 @@ class _SingleEventPageState extends State<SingleEventPage> {
                             height: 7,
                           ),
                           Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                            event.about!,
                             style: AppResources.appStyles.textStyles.bodySmall
                                 .copyWith(
                               color: AppResources.appColors.typographyDark,
@@ -280,101 +285,6 @@ class _SingleEventPageState extends State<SingleEventPage> {
                           ),
                         ],
                       ),
-
-                      //test
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'About',
-                            style: AppResources
-                                .appStyles.textStyles.bodyDefaultBold
-                                .copyWith(
-                              color: AppResources.appColors.typographyDark,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            style: AppResources.appStyles.textStyles.bodySmall
-                                .copyWith(
-                              color: AppResources.appColors.typographyDark,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'About',
-                            style: AppResources
-                                .appStyles.textStyles.bodyDefaultBold
-                                .copyWith(
-                              color: AppResources.appColors.typographyDark,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            style: AppResources.appStyles.textStyles.bodySmall
-                                .copyWith(
-                              color: AppResources.appColors.typographyDark,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'About',
-                            style: AppResources
-                                .appStyles.textStyles.bodyDefaultBold
-                                .copyWith(
-                              color: AppResources.appColors.typographyDark,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            style: AppResources.appStyles.textStyles.bodySmall
-                                .copyWith(
-                              color: AppResources.appColors.typographyDark,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'About',
-                            style: AppResources
-                                .appStyles.textStyles.bodyDefaultBold
-                                .copyWith(
-                              color: AppResources.appColors.typographyDark,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            style: AppResources.appStyles.textStyles.bodySmall
-                                .copyWith(
-                              color: AppResources.appColors.typographyDark,
-                            ),
-                          ),
-                        ],
-                      ),
-                      //end
                       const SizedBox(
                         height: 32.5,
                       )
