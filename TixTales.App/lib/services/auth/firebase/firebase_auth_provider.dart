@@ -77,7 +77,7 @@ class FirebaseAuthProvider extends AuthProvider {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') {
-        throw WrongPasswordException;
+        throw WeakPasswordException();
       } else if (e.code == 'invalid-email') {
         throw InvalidEmailException;
       } else if (e.code == 'user-not-found') {
