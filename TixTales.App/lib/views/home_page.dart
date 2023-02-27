@@ -293,7 +293,7 @@ class MySmallCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: InkWell(
         onTap: () {
-          Navigator.of(context).pushNamed(singleEventPage);
+          Navigator.of(context).pushNamed(singleEventPage, arguments: event);
         },
         child: Row(
           children: [
