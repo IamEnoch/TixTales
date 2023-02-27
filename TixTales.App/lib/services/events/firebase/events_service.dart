@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tix_tales/services/events/firebase/event.dart';
+import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/services/events/firebase/events_exceptions.dart';
 
 class EventsService {

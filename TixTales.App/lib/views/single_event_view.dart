@@ -44,7 +44,7 @@ class _SingleEventPageState extends State<SingleEventPage> {
                     height: 2,
                   ),
                   Text(
-                    '€ 35.00 - € 75.00',
+                    event.priceRange!,
                     style: AppResources.appStyles.textStyles.bodyDefault
                         .copyWith(color: AppResources.appColors.typographyDark),
                   )
@@ -260,7 +260,7 @@ class _SingleEventPageState extends State<SingleEventPage> {
                         ],
                       ),
                       const SizedBox(
-                        height: 130,
+                        height: 35.1,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
