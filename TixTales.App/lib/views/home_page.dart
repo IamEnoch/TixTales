@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tix_tales/services/events/firebase/event.dart';
+import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/services/events/firebase/events_service.dart';
+import 'package:tix_tales/services/users/firebase/users_service.dart';
+import 'package:tix_tales/services/users/user.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 import 'package:tix_tales/src/Constants/routes.dart';
@@ -105,8 +108,9 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.zero,
                                   child: InkWell(
                                     onTap: () {
-                                      Navigator.of(context)
-                                          .pushNamed(singleEventPage);
+                                      Navigator.of(context).pushNamed(
+                                          singleEventPage,
+                                          arguments: allEvents.elementAt(0));
                                     },
                                     child: SizedBox(
                                       height: 230,
@@ -287,6 +291,8 @@ class MySmallCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserService _usersService = UserService();
+    final userId = FirebaseAuth.instance.currentUser!.uid;
     return Card(
       margin: const EdgeInsets.all(0),
       clipBehavior: Clip.antiAlias,
@@ -345,7 +351,14 @@ class MySmallCard extends StatelessWidget {
                     alignment: Alignment.center,
                     constraints:
                         const BoxConstraints(maxHeight: 25, maxWidth: 25),
-                    onPressed: () {},
+                    onPressed: () {
+                      Favourite? favourite = Favourite(eventId: event.eventId!);
+                      var jk = favourite.toJson();
+
+                      _usersService.updateUser(
+                        eventId: jk,
+                      );
+                    },
                     icon: Image.asset(
                       AppAssets.heartIcon,
                       color: AppResources.appColors.iconGrey,
