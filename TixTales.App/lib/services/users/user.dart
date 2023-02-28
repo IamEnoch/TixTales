@@ -6,20 +6,20 @@ List<T> convertDynamicListToListOfObjects<T>(
 }
 
 //User model
-class User {
+class AppUser {
   final String documentId;
   final String userId;
   final List<Ticket> tickets;
   final List<Favourite> favourites;
 
-  User({
+  const AppUser({
     required this.documentId,
     required this.userId,
     required this.tickets,
     required this.favourites,
   });
 
-  factory User.fromSnapshot(
+  factory AppUser.fromSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot) {
     List<dynamic> dynamicTicketList = snapshot.data()['tickets'];
     List<dynamic> dynamicFavouriteList = snapshot.data()['favourites'];
@@ -32,7 +32,7 @@ class User {
     List<Favourite> myFavouritesList = convertDynamicListToListOfObjects(
         dynamicFavouriteList, (value) => Favourite.fromMap(value));
 
-    return User(
+    return AppUser(
       documentId: snapshot.data()['documentId'],
       userId: snapshot.data()['userId'],
       tickets: myTicketsList,
@@ -46,7 +46,7 @@ class Ticket {
   final String? eventId;
   final String? ticketsBought;
 
-  Ticket({
+  const Ticket({
     required this.eventId,
     required this.ticketsBought,
   });
@@ -63,7 +63,13 @@ class Ticket {
 class Favourite {
   final String? eventId;
 
-  Favourite({required this.eventId});
+  const Favourite({required this.eventId});
+
+  Map<String, String> toJson() {
+    final Map<String, String> data = <String, String>{};
+    data['eventId'] = eventId!;
+    return data;
+  }
 
   factory Favourite.fromMap(Map<String, dynamic> map) {
     return Favourite(
