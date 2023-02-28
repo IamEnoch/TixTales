@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:tix_tales/services/events/firebase/event.dart';
+import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 
