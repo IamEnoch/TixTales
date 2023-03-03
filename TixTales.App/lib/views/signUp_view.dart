@@ -78,7 +78,7 @@ class _SignUpViewState extends State<SignUpView> {
               showSendEmailVerfification = true;
             });
             Fluttertoast.showToast(
-              msg: "The state needs verification",
+              msg: "The state needs Verification",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 1,
