@@ -64,7 +64,7 @@ class _SignUpViewState extends State<SignUpView> {
           }
           if (state is AuthStateRegistering) {
             Fluttertoast.showToast(
-              msg: "The state is registering",
+              msg: "The state is Registering",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 1,
