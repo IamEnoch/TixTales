@@ -53,7 +53,7 @@ class _SignUpViewState extends State<SignUpView> {
         listener: (context, state) async {
           if (state is AuthStateUninitialized) {
             Fluttertoast.showToast(
-              msg: "The state is uninitialized",
+              msg: "The state is Uninitialized",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 1,
