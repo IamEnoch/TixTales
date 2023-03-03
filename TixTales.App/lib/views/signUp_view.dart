@@ -143,7 +143,7 @@ class _SignUpViewState extends State<SignUpView> {
                     height: MediaQuery.of(context).size.height * 0.07,
                   ),
                   Text(
-                    'Full name',
+                    'Full Name',
                     style: AppResources.appStyles.textStyles.bodyDefaultBold
                         .copyWith(
                       color: AppResources.appColors.typographyGrey,
