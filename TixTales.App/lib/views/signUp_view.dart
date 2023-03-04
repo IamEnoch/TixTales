@@ -231,7 +231,7 @@ class _SignUpViewState extends State<SignUpView> {
                             });
                           },
                         ),
-                        hintText: 'Enter your password',
+                        hintText: 'Enter your Password',
                         hintStyle: AppResources
                             .appStyles.textStyles.bodyTextInput
                             .copyWith(
