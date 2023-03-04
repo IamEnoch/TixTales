@@ -31,7 +31,7 @@ class OnboardingView extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.01,
               ),
               Text(
-                'Sign in or create a new account',
+                'Sign in or create a new Account',
                 style: AppResources.appStyles.textStyles.bodyDefault
                     .copyWith(color: AppResources.appColors.typographyGrey),
               ),
