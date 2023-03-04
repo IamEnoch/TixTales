@@ -83,7 +83,7 @@ class OnboardingView extends StatelessWidget {
                         AppResources.appColors.typographyGlobalLight,
                   ),
                   child: Text(
-                    'No account yet? Sign up',
+                    'No Account yet? Sign up',
                     style: AppResources
                         .appStyles.textStyles.componentsButtonDefault
                         .copyWith(
