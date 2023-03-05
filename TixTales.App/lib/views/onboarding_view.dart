@@ -59,7 +59,7 @@ class OnboardingView extends StatelessWidget {
                     backgroundColor: AppResources.appColors.globalPrimary,
                   ),
                   child: Text(
-                    'Sign in',
+                    'Sign In',
                     style: AppResources
                         .appStyles.textStyles.componentsButtonDefault
                         .copyWith(
