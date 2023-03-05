@@ -48,7 +48,7 @@ class _LoginViewState extends State<LoginView> {
 
           if (state.exception is InvalidEmailException) {
             Fluttertoast.showToast(
-              msg: "invalid email",
+              msg: "Invalid Email",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 1,
