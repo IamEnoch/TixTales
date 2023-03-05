@@ -58,7 +58,7 @@ class _LoginViewState extends State<LoginView> {
             );
           } else if (state.exception is WrongPasswordException) {
             Fluttertoast.showToast(
-              msg: "Wrong password",
+              msg: "Wrong Password",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 1,
