@@ -21,7 +21,7 @@ class VerifyEmail extends StatelessWidget {
                     .add(const AuthEventSendEmailVerification());
                 Navigator.pop(context);
               },
-              child: const Text('Send email verification'),
+              child: const Text('Send Email Verification'),
             ),
           ],
         ),
