@@ -4,3 +4,4 @@ const homePageRoute = '/home-page/';
 const onboardingRoute = '/onboarding-page/';
 const tabPageRoute = '/tab-page/';
 const singleEventPage = '/single-event-page/';
+const buyTicketPage = '/buy-ticket-page/';

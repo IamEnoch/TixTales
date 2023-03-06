@@ -4,6 +4,7 @@ import 'package:tix_tales/services/auth/bloc/auth_bloc.dart';
 import 'package:tix_tales/services/auth/bloc/auth_state.dart';
 import 'package:tix_tales/services/auth/firebase/firebase_auth_provider.dart';
 import 'package:tix_tales/src/Constants/routes.dart';
+import 'package:tix_tales/views/buy_ticket_page.dart';
 import 'package:tix_tales/views/home_page.dart';
 import 'package:tix_tales/views/auth/onboarding_view.dart';
 import 'package:tix_tales/views/auth/login_view.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
               homePageRoute: (context) => const HomePage(),
               tabPageRoute: (context) => const TabPage(),
               singleEventPage: (context) => const SingleEventPage(),
+              buyTicketPage: (context) => const BuyTicketPage(),
             },
           );
         },
