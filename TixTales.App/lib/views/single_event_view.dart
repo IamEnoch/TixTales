@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
+import 'package:tix_tales/src/Constants/routes.dart';
 
 class SingleEventPage extends StatelessWidget {
   const SingleEventPage({
@@ -53,7 +54,9 @@ class SingleEventPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.48,
                   height: MediaQuery.of(context).size.width * 0.39,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, buyTicketPage);
+                    },
                     style: AppResources.buttonStyles.buttonStyle(
                       backgroundColor: AppResources.appColors.globalPrimary,
                     ),
