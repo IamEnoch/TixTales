@@ -5,9 +5,9 @@ import 'package:tix_tales/services/auth/bloc/auth_state.dart';
 import 'package:tix_tales/services/auth/firebase/firebase_auth_provider.dart';
 import 'package:tix_tales/src/Constants/routes.dart';
 import 'package:tix_tales/views/home_page.dart';
-import 'package:tix_tales/views/onboarding_view.dart';
-import 'package:tix_tales/views/login_view.dart';
-import 'package:tix_tales/views/signUp_view.dart';
+import 'package:tix_tales/views/auth/onboarding_view.dart';
+import 'package:tix_tales/views/auth/login_view.dart';
+import 'package:tix_tales/views/auth/signUp_view.dart';
 import 'package:tix_tales/views/single_event_view.dart';
 import 'package:tix_tales/views/tab_page.dart';
 
