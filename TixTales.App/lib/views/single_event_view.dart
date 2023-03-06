@@ -4,16 +4,11 @@ import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 
-class SingleEventPage extends StatefulWidget {
+class SingleEventPage extends StatelessWidget {
   const SingleEventPage({
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<SingleEventPage> createState() => _SingleEventPageState();
-}
-
-class _SingleEventPageState extends State<SingleEventPage> {
   @override
   Widget build(BuildContext context) {
     //Read the arguments that contains the event
