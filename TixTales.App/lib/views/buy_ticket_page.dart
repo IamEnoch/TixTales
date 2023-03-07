@@ -83,7 +83,7 @@ class BuyTicketPage extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * 0.01,
                   ),
                   Text(
-                    'Mon, Apr 18 ·21:00 Pm ',
+                    'Mon, Apr18 ·21:00 Pm ',
                     style: AppResources.appStyles.textStyles.bodySmall.copyWith(
                       color: AppResources.appColors.typographyDark,
                     ),
