@@ -50,7 +50,7 @@ class BuyTicketPage extends StatelessWidget {
                       backgroundColor: AppResources.appColors.globalPrimary,
                     ),
                     child: Text(
-                      'Buy',
+                      'Buy ',
                       style: AppResources
                           .appStyles.textStyles.componentsButtonDefault
                           .copyWith(
