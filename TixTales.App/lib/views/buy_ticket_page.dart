@@ -74,7 +74,7 @@ class BuyTicketPage extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * 0.03,
                   ),
                   Text(
-                    'La Rosalia',
+                    'LaRosalia',
                     style: AppResources.appStyles.textStyles.headineH5.copyWith(
                       color: AppResources.appColors.globalDark,
                     ),
