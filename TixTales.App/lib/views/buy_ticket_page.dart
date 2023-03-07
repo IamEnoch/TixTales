@@ -31,7 +31,7 @@ class BuyTicketPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.16,
               ),
               Text(
-                '€67.00',
+                '€67.000',
                 style:
                     AppResources.appStyles.textStyles.bodyDefaultBold.copyWith(
                   color: AppResources.appColors.globalDark,
