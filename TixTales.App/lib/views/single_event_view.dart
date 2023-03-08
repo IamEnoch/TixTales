@@ -15,6 +15,7 @@ class SingleEventPage extends StatelessWidget {
     //Read the arguments that contains the event
     final AppEvent event =
         ModalRoute.of(context)?.settings.arguments as AppEvent;
+
     final screenHeight = MediaQuery.of(context).size.height;
     const bottomSheetHeight = 87.0;
     final maxScrollViewHeight = screenHeight - bottomSheetHeight;
@@ -54,8 +55,10 @@ class SingleEventPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.48,
                   height: MediaQuery.of(context).size.width * 0.39,
                   child: OutlinedButton(
+                    //navigate to buy ticket page
                     onPressed: () {
-                      Navigator.pushNamed(context, buyTicketPage);
+                      Navigator.pushNamed(context, buyTicketPage,
+                          arguments: event.price!);
                     },
                     style: AppResources.buttonStyles.buttonStyle(
                       backgroundColor: AppResources.appColors.globalPrimary,
