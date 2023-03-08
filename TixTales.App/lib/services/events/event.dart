@@ -121,7 +121,7 @@ class PriceCategory {
       fee: map['fee'],
       price: map['price'],
       salesEnd: map['salesEnd'],
-      ticketType: map['ticketType'],
+      ticketType: map['tickeType'],
     );
   }
 }
