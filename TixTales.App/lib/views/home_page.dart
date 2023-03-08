@@ -250,19 +250,19 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 const SizedBox(height: 20),
                                 ListView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: allEvents.length - 1,
-                                    itemBuilder: (context, index) {
-                                      return Container(
-                                        margin: const EdgeInsets.fromLTRB(
-                                            0, 0, 0, 20),
-                                        child: MySmallCard(
-                                          event: allEvents.elementAt(index + 1),
-                                        ),
-                                      );
-                                    })
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: allEvents.length - 1,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      margin: const EdgeInsets.fromLTRB(
+                                          0, 0, 0, 20),
+                                      child: MySmallCard(
+                                        event: allEvents.elementAt(index + 1),
+                                      ),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           ]),
