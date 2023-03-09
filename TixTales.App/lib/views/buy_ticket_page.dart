@@ -182,7 +182,7 @@ class _SingleTicketState extends State<SingleTicket> {
               height: MediaQuery.of(context).size.height * 0.005,
             ),
             Text(
-              'Sales end on ${widget.ticket.salesEnd!} ',
+              'Sales End on ${widget.ticket.salesEnd!} ',
               style: AppResources.appStyles.textStyles.bodySmall.copyWith(
                 color: AppResources.appColors.typographyDark,
               ),
