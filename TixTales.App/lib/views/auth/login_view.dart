@@ -68,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
             );
           } else if (state.exception is UserNotFoundException) {
             Fluttertoast.showToast(
-              msg: "User not found",
+              msg: "User Not found",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 1,
