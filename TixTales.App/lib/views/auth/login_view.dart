@@ -78,7 +78,7 @@ class _LoginViewState extends State<LoginView> {
             );
           } else if (state.exception is GenericException) {
             Fluttertoast.showToast(
-              msg: "Generic exception",
+              msg: "Generic Exception",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 1,
