@@ -64,7 +64,7 @@ class SingleEventPage extends StatelessWidget {
                       backgroundColor: AppResources.appColors.globalPrimary,
                     ),
                     child: Text(
-                      'Tickets',
+                      'Ticket',
                       style: AppResources
                           .appStyles.textStyles.componentsButtonDefault
                           .copyWith(
