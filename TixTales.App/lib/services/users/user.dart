@@ -51,6 +51,12 @@ class Ticket {
     required this.ticketsBought,
   });
 
+  Map<String, String> toJson() {
+    final Map<String, String> data = <String, String>{};
+    data['eventId'] = eventId!;
+    return data;
+  }
+
   factory Ticket.fromMap(Map<String, dynamic> map) {
     return Ticket(
       eventId: map['eventId'],
@@ -77,3 +83,5 @@ class Favourite {
     );
   }
 }
+
+//
