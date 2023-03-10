@@ -61,6 +61,34 @@ class UserService {
     }
   }
 
+  //Update user tickets bought information
+  Future<void> updateUserTicketsInfo({
+    required List<Map<String, String>> ticketsInfo,
+  }) async {
+    try {
+      print('we are about to update ticket info');
+      var check = await specificQuery();
+      for (var doc in check.docs) {
+        // Update the document
+        for (var ticketInfo in ticketsInfo) {
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(doc.id)
+              .update({
+                'tickets': FieldValue.arrayUnion([ticketInfo]),
+                //'tickets': FieldValue.arrayUnion([ticket])
+              })
+              .then((value) => print("Document updated"))
+              .catchError(
+                  (error) => print("Failed to update document: $error"));
+        }
+      }
+    } catch (e) {
+      print("The error is$e");
+      throw CouldNotUpdateNoteExceptions();
+    }
+  }
+
   //Make user service singleton
   static final UserService _shared = UserService._internalInstance();
   UserService._internalInstance();
