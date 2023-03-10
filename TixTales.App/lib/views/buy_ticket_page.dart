@@ -17,7 +17,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
   //and updates the state of the bottom sheet:
   void updateBottomSheetData(double data) {
     setState(() {
-      _bottomSheetPrice = data;
+      _bottomSheetPrice += data;
     });
   }
 
@@ -237,14 +237,20 @@ class _SingleTicketState extends State<SingleTicket> {
               );
             }).toList(),
             onChanged: (value) {
-              setState(() {
-                selectedValue = value!;
-                _totalPriceOfTickets = totalPriceCalculate(
-                  numberOfTickets: selectedValue!,
-                  ticketPrice: eachTicketPrice,
-                );
-                widget.onDataChanged(_totalPriceOfTickets);
-              });
+              if (selectedValue != value) {
+                setState(() {
+                  //if(selectedValue! < value!)
+                  //selectedValue! > value! ? myValue = -value : myValue = value;
+                  //selectedValue = value;
+                  int myValue = value! - selectedValue!;
+                  selectedValue = value;
+                  _totalPriceOfTickets = totalPriceCalculate(
+                    numberOfTickets: myValue,
+                    ticketPrice: eachTicketPrice,
+                  );
+                  widget.onDataChanged(_totalPriceOfTickets);
+                });
+              }
             },
           ),
         ),
