@@ -122,6 +122,9 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                         color: AppResources.appColors.typographyDark,
                       ),
                     ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.09,
+                    ),
                     ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -218,6 +221,9 @@ class _SingleTicketState extends State<SingleTicket> {
               ),
             ),
           ],
+        ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.41,
         ),
         DropdownButtonHideUnderline(
           child: DropdownButton<int>(
