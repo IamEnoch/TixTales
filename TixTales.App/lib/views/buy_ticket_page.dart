@@ -3,8 +3,23 @@ import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/src/Constants/app_assets.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 
-class BuyTicketPage extends StatelessWidget {
+class BuyTicketPage extends StatefulWidget {
   const BuyTicketPage({super.key});
+
+  @override
+  State<BuyTicketPage> createState() => _BuyTicketPageState();
+}
+
+class _BuyTicketPageState extends State<BuyTicketPage> {
+  double _bottomSheetPrice = 0;
+
+  //Define a callback function that takes an int parameter (the data you want to pass back)
+  //and updates the state of the bottom sheet:
+  void updateBottomSheetData(double data) {
+    setState(() {
+      _bottomSheetPrice = data;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +50,7 @@ class BuyTicketPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.16,
               ),
               Text(
-                '€67.00',
+                '€$_bottomSheetPrice',
                 style:
                     AppResources.appStyles.textStyles.bodyDefaultBold.copyWith(
                   color: AppResources.appColors.globalDark,
@@ -117,7 +132,8 @@ class BuyTicketPage extends StatelessWidget {
                             height: MediaQuery.of(context).size.height * 0.017,
                           ),
                           SingleTicket(
-                            ticket: event.elementAt(index),
+                            myTicket: event.elementAt(index),
+                            onDataChanged: updateBottomSheetData,
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.017,
@@ -141,16 +157,30 @@ class BuyTicketPage extends StatelessWidget {
 }
 
 class SingleTicket extends StatefulWidget {
-  final PriceCategory ticket;
+  final PriceCategory? myTicket;
 
-  const SingleTicket({super.key, required this.ticket});
+  //field for the callback function and call it whenever the data changes:
+  final Function(double) onDataChanged;
+
+  const SingleTicket({super.key, this.myTicket, required this.onDataChanged});
 
   @override
   State<SingleTicket> createState() => _SingleTicketState();
 }
 
 class _SingleTicketState extends State<SingleTicket> {
-  String? selectedValue;
+  int? selectedValue = 0;
+  late int eachTicketPrice = int.parse(widget.myTicket!.price!);
+  double _totalPriceOfTickets = 0;
+
+  //method to calculate total price
+  double totalPriceCalculate({
+    required int ticketPrice,
+    required int numberOfTickets,
+  }) {
+    int result = ticketPrice * numberOfTickets;
+    return result.toDouble();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,9 +190,9 @@ class _SingleTicketState extends State<SingleTicket> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              (widget.ticket.ticketType! == 'earlyBird')
+              (widget.myTicket!.ticketType! == 'earlyBird')
                   ? 'Early Bird'
-                  : (widget.ticket.ticketType! == 'general')
+                  : (widget.myTicket!.ticketType! == 'general')
                       ? 'General'
                       : 'Second Release',
               style: AppResources.appStyles.textStyles.bodyDefaultBold.copyWith(
@@ -173,7 +203,7 @@ class _SingleTicketState extends State<SingleTicket> {
               height: MediaQuery.of(context).size.height * 0.013,
             ),
             Text(
-              '€${widget.ticket.price!}',
+              '€${widget.myTicket!.price!}',
               style: AppResources.appStyles.textStyles.bodySmall.copyWith(
                 color: AppResources.appColors.typographyGrey,
               ),
@@ -182,39 +212,41 @@ class _SingleTicketState extends State<SingleTicket> {
               height: MediaQuery.of(context).size.height * 0.005,
             ),
             Text(
-              'Sales End on ${widget.ticket.salesEnd!} ',
+              'Sales End on ${widget.myTicket!.salesEnd!} ',
               style: AppResources.appStyles.textStyles.bodySmall.copyWith(
                 color: AppResources.appColors.typographyDark,
               ),
             ),
           ],
         ),
-        DropdownButton<String>(
-          underline: Container(),
-          style: AppResources.appStyles.textStyles.headineH6.copyWith(
-            color: AppResources.appColors.typographyDark,
-            fontSize: 18,
+        DropdownButtonHideUnderline(
+          child: DropdownButton<int>(
+            style: AppResources.appStyles.textStyles.headineH6.copyWith(
+              color: AppResources.appColors.typographyDark,
+              fontSize: 18,
+            ),
+            value: selectedValue,
+            items: const [
+              0,
+              1,
+              2,
+            ].map((option) {
+              return DropdownMenuItem(
+                value: option,
+                child: Text("$option"),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                selectedValue = value!;
+                _totalPriceOfTickets = totalPriceCalculate(
+                  numberOfTickets: selectedValue!,
+                  ticketPrice: eachTicketPrice,
+                );
+                widget.onDataChanged(_totalPriceOfTickets);
+              });
+            },
           ),
-          value: selectedValue,
-          items: const [
-            DropdownMenuItem(
-              value: '1',
-              child: Text('1'),
-            ),
-            DropdownMenuItem(
-              value: '2',
-              child: Text('2'),
-            ),
-            DropdownMenuItem(
-              value: '3',
-              child: Text('3'),
-            ),
-          ],
-          onChanged: (value) {
-            setState(() {
-              selectedValue = value!;
-            });
-          },
         ),
       ],
     );
