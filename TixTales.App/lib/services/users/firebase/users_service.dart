@@ -78,9 +78,9 @@ class UserService {
                 'tickets': FieldValue.arrayUnion([ticketInfo]),
                 //'tickets': FieldValue.arrayUnion([ticket])
               })
-              .then((value) => print("Document updated"))
+              .then((value) => print("Document Updated"))
               .catchError(
-                  (error) => print("Failed to update document: $error"));
+                  (error) => print("Failed to update Document: $error"));
         }
       }
     } catch (e) {
