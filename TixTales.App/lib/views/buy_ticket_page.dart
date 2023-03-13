@@ -245,9 +245,6 @@ class _SingleTicketState extends State<SingleTicket> {
             onChanged: (value) {
               if (selectedValue != value) {
                 setState(() {
-                  //if(selectedValue! < value!)
-                  //selectedValue! > value! ? myValue = -value : myValue = value;
-                  //selectedValue = value;
                   int myValue = value! - selectedValue!;
                   selectedValue = value;
                   _totalPriceOfTickets = totalPriceCalculate(
