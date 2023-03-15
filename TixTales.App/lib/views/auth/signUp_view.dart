@@ -258,7 +258,7 @@ class _SignUpViewState extends State<SignUpView> {
                   TextFormField(
                     autovalidateMode: AutovalidateMode.always,
                     validator: (val) => errorText =
-                        MatchValidator(errorText: 'Passwords Do Not match')
+                        MatchValidator(errorText: 'Passwords Do Not Match')
                             .validateMatch(repeatPasswordEditingController.text,
                                 passwordEditingController.text),
                     controller: repeatPasswordEditingController,
