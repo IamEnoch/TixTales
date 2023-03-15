@@ -279,7 +279,7 @@ class _SignUpViewState extends State<SignUpView> {
                             });
                           },
                         ),
-                        hintText: 'Repeat New passoword',
+                        hintText: 'Repeat New Password',
                         hintStyle: AppResources
                             .appStyles.textStyles.bodyTextInput
                             .copyWith(
