@@ -11,6 +11,7 @@ import 'package:tix_tales/views/auth/login_view.dart';
 import 'package:tix_tales/views/auth/signUp_view.dart';
 import 'package:tix_tales/views/singleEvent/single_event_view.dart';
 import 'package:tix_tales/views/tab_page.dart';
+import 'package:tix_tales/views/tickets/tickets_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
               tabPageRoute: (context) => const TabPage(),
               singleEventPage: (context) => const SingleEventPage(),
               buyTicketPage: (context) => const BuyTicketPage(),
+              ticketsPage: (context) => const TicketsPage(),
             },
           );
         },
