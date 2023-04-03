@@ -45,15 +45,34 @@ class UserService {
       var check = await specificQuery();
       for (var doc in check.docs) {
         // Update the document
-        FirebaseFirestore.instance
-            .collection('users')
-            .doc(doc.id)
-            .update({
-              'favourites': FieldValue.arrayUnion([eventId]),
-              //'tickets': FieldValue.arrayUnion([ticket])
-            })
-            .then((value) => print("Document updated"))
-            .catchError((error) => print("Failed to update document: $error"));
+        var documentReference =
+            FirebaseFirestore.instance.collection('users').doc(doc.id);
+
+        documentReference.get().then((DocumentSnapshot documentSnapshot) {
+          if (documentSnapshot.exists) {
+            final data = documentSnapshot.data() as Map<String, dynamic>;
+            if (data.containsKey('favourites')) {
+              if (data['favourites']
+                  .where('eventId', isEqualTo: eventId['eventId'])) {
+                documentReference
+                    .update({
+                      'favourites': FieldValue.arrayRemove([eventId]),
+                    })
+                    .then((value) => print("Document updated"))
+                    .catchError(
+                        (error) => print("Failed to update document: $error"));
+              } else {
+                documentReference
+                    .update({
+                      'favourites': FieldValue.arrayUnion([eventId]),
+                    })
+                    .then((value) => print("Document updated"))
+                    .catchError(
+                        (error) => print("Failed to update document: $error"));
+              }
+            } else {}
+          }
+        });
       }
     } catch (e) {
       print("The error is$e");
