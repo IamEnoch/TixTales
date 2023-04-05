@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tix_tales/Logging/logger.dart';
 import 'package:tix_tales/services/users/firebase/users_exceptions.dart';
 import 'package:tix_tales/services/users/user.dart';
 
 class UserService {
+  final log = logger(UserService);
   final users = FirebaseFirestore.instance.collection('users');
 
   Future<QuerySnapshot<Object?>> specificQuery() async {
@@ -38,7 +40,7 @@ class UserService {
 
   //Updating existing user
   Future<void> updateUser({
-    required Map<String, String> eventId,
+    required String eventId,
   }) async {
     try {
       print('we are here');
@@ -50,27 +52,36 @@ class UserService {
 
         documentReference.get().then((DocumentSnapshot documentSnapshot) {
           if (documentSnapshot.exists) {
-            final data = documentSnapshot.data() as Map<String, dynamic>;
-            if (data.containsKey('favourites')) {
-              if (data['favourites']
-                  .where('eventId', isEqualTo: eventId['eventId'])) {
-                documentReference
-                    .update({
-                      'favourites': FieldValue.arrayRemove([eventId]),
-                    })
-                    .then((value) => print("Document updated"))
-                    .catchError(
-                        (error) => print("Failed to update document: $error"));
-              } else {
-                documentReference
-                    .update({
-                      'favourites': FieldValue.arrayUnion([eventId]),
-                    })
-                    .then((value) => print("Document updated"))
-                    .catchError(
-                        (error) => print("Failed to update document: $error"));
-              }
-            } else {}
+            final info = documentSnapshot.data() as Map<String, dynamic>;
+            final myfavourites = info['favourites'] as dynamic;
+
+            print(info);
+            print(myfavourites);
+
+            bool containsValueToCheck = myfavourites
+                .any((favourite) => favourite['eventId'] == eventId);
+
+            if (containsValueToCheck) {
+              documentReference
+                  .update({
+                    'favourites': FieldValue.arrayRemove([
+                      {'eventId': eventId}
+                    ]),
+                  })
+                  .then((value) => log.d("Document updated. Item removed"))
+                  .catchError(
+                      (error) => log.d("Failed to update document: $error"));
+            } else {
+              documentReference
+                  .update({
+                    'favourites': FieldValue.arrayUnion([
+                      {'eventId': eventId}
+                    ]),
+                  })
+                  .then((value) => log.d("Document updated. Item added"))
+                  .catchError(
+                      (error) => log.d("Failed to update document: $error"));
+            }
           }
         });
       }
@@ -97,9 +108,9 @@ class UserService {
                 'tickets': FieldValue.arrayUnion([ticketInfo]),
                 //'tickets': FieldValue.arrayUnion([ticket])
               })
-              .then((value) => print("Document Updated"))
+              .then((value) => log.d("Document Updated"))
               .catchError(
-                  (error) => print("Failed to update Document: $error"));
+                  (error) => log.d("Failed to update Document: $error"));
         }
       }
     } catch (e) {
