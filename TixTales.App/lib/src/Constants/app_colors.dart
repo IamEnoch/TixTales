@@ -5,6 +5,7 @@ class AppColors {
   Color globalDark = const Color(0xFF000000);
   Color globalGrey = const Color(0xFFF2F2F2);
   Color iconGrey = const Color(0xFFBDBDBD);
+  Color iconRed = const Color(0xFFF01717);
   Color typographyGrey = const Color(0xFF7C7C7C);
   Color typographyTextInputGrey = const Color(0xFFC0BCBC);
   Color typographyDark = const Color(0xFF262627);
