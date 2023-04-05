@@ -38,52 +38,67 @@ class UserService {
     );
   }
 
-  //Updating existing user
-  Future<void> updateUser({
+  //Is favourite or not method
+  Future<bool> isFavourite({
+    required String eventId,
+  }) async {
+    var check = await specificQuery();
+    bool containsValueToCheck = false;
+
+    for (var doc in check.docs) {
+      // Update the document
+      var documentReference =
+          FirebaseFirestore.instance.collection('users').doc(doc.id);
+
+      await documentReference.get().then(
+        (DocumentSnapshot documentSnapshot) {
+          if (documentSnapshot.exists) {
+            final info = documentSnapshot.data() as Map<String, dynamic>;
+            final myfavourites = info['favourites'] as dynamic;
+
+            myfavourites.any((favourite) => favourite['eventId'] == eventId)
+                ? containsValueToCheck = true
+                : containsValueToCheck = false;
+          }
+        },
+      );
+    }
+    return containsValueToCheck;
+  }
+
+  //Add/remove favourite method
+  Future<void> addOrRemoveFavourite({
     required String eventId,
   }) async {
     try {
-      print('we are here');
       var check = await specificQuery();
+
       for (var doc in check.docs) {
         // Update the document
         var documentReference =
             FirebaseFirestore.instance.collection('users').doc(doc.id);
 
-        documentReference.get().then((DocumentSnapshot documentSnapshot) {
-          if (documentSnapshot.exists) {
-            final info = documentSnapshot.data() as Map<String, dynamic>;
-            final myfavourites = info['favourites'] as dynamic;
-
-            print(info);
-            print(myfavourites);
-
-            bool containsValueToCheck = myfavourites
-                .any((favourite) => favourite['eventId'] == eventId);
-
-            if (containsValueToCheck) {
-              documentReference
-                  .update({
-                    'favourites': FieldValue.arrayRemove([
-                      {'eventId': eventId}
-                    ]),
-                  })
-                  .then((value) => log.d("Document updated. Item removed"))
-                  .catchError(
-                      (error) => log.d("Failed to update document: $error"));
-            } else {
-              documentReference
-                  .update({
-                    'favourites': FieldValue.arrayUnion([
-                      {'eventId': eventId}
-                    ]),
-                  })
-                  .then((value) => log.d("Document updated. Item added"))
-                  .catchError(
-                      (error) => log.d("Failed to update document: $error"));
-            }
-          }
-        });
+        if (await isFavourite(eventId: eventId)) {
+          documentReference
+              .update({
+                'favourites': FieldValue.arrayRemove([
+                  {'eventId': eventId}
+                ]),
+              })
+              .then((value) => log.d("Document updated. Item removed"))
+              .catchError(
+                  (error) => log.d("Failed to update document: $error"));
+        } else {
+          documentReference
+              .update({
+                'favourites': FieldValue.arrayUnion([
+                  {'eventId': eventId}
+                ]),
+              })
+              .then((value) => log.d("Document updated. Item added"))
+              .catchError(
+                  (error) => log.d("Failed to update document: $error"));
+        }
       }
     } catch (e) {
       print("The error is$e");
