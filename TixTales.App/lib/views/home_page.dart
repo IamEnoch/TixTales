@@ -408,11 +408,11 @@ class _MySmallCardState extends State<MySmallCard> {
                       Favourite? favourite =
                           Favourite(eventId: widget.event.eventId!);
                       var jk = favourite.toJson();
+                      await _toggleFavorite();
 
                       await _usersService.addOrRemoveFavourite(
                         eventId: jk['eventId']!,
                       );
-                      await _toggleFavorite();
                     },
                     icon: Image.asset(AppAssets.heartIcon,
                         color: isFavourite
