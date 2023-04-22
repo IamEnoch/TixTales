@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
 var logger = (Type type) => Logger(printer: CustomPrinter(type.toString()));
