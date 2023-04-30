@@ -15,7 +15,7 @@ class EventsService {
   }
 
   //getting events by user
-  Future<Iterable<AppEvent>> getNotes() async {
+  Future<Iterable<AppEvent>> getEvents() async {
     try {
       return await events
           .get()
