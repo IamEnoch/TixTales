@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
+import 'package:tix_tales/views/tickets/upcoming_tab.dart';
 
 class TicketsPage extends StatefulWidget {
   const TicketsPage({super.key});
@@ -52,7 +53,7 @@ class _TicketsPageState extends State<TicketsPage>
         controller: _tabController,
         children: const [
           // Add your content for Tab 1 here
-          Text('Content for Tab 1'),
+          UpcomingTab(),
           // Add your content for Tab 2 here
           Text('Content for Tab 2'),
         ],
