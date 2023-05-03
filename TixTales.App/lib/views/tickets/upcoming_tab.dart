@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:tix_tales/Logging/logger.dart';
 import 'package:tix_tales/services/events/firebase/events_service.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
-import 'package:tix_tales/src/Constants/app_resources.dart';
 
 class UpcomingTab extends StatefulWidget {
   const UpcomingTab({super.key});
