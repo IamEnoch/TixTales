@@ -45,13 +45,13 @@ class _TicketCardState extends State<TicketCard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('La rosalia',
+                          Text(widget.event.eventName!,
                               style: AppResources
                                   .appStyles.textStyles.bodyDefaultBold),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.005,
                           ),
-                          Text('Date',
+                          Text(widget.event.eventDate!,
                               style:
                                   AppResources.appStyles.textStyles.bodySmall),
                         ],
@@ -67,8 +67,7 @@ class _TicketCardState extends State<TicketCard> {
           ),
           Expanded(
             child: Ink.image(
-              image: const NetworkImage(
-                  "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"),
+              image: NetworkImage(widget.event.thumbNail!),
               width: 10,
               height: MediaQuery.of(context).size.height * 0.125,
               fit: BoxFit.cover,
