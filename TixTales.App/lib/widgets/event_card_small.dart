@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:tix_tales/services/events/event.dart';
+import 'package:tix_tales/services/users/favourite.dart';
 import 'package:tix_tales/services/users/firebase/users_service.dart';
 import 'package:tix_tales/services/users/user.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';

@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tix_tales/services/users/favourite.dart';
+import 'package:tix_tales/services/users/ticket.dart';
 
 List<T> convertDynamicListToListOfObjects<T>(
     List<dynamic> dynamicList, T Function(dynamic) f) {
@@ -40,48 +42,3 @@ class AppUser {
     );
   }
 }
-
-//Ticket model
-class Ticket {
-  final String? eventId;
-  final String? ticketsBought;
-
-  const Ticket({
-    required this.eventId,
-    required this.ticketsBought,
-  });
-
-  Map<String, String> toJson() {
-    final Map<String, String> data = <String, String>{};
-    data['eventId'] = eventId!;
-    return data;
-  }
-
-  factory Ticket.fromMap(Map<String, dynamic> map) {
-    return Ticket(
-      eventId: map['eventId'],
-      ticketsBought: map['ticketsBought'],
-    );
-  }
-}
-
-//Favourite model
-class Favourite {
-  final String? eventId;
-
-  const Favourite({required this.eventId});
-
-  Map<String, String> toJson() {
-    final Map<String, String> data = <String, String>{};
-    data['eventId'] = eventId!;
-    return data;
-  }
-
-  factory Favourite.fromMap(Map<String, dynamic> map) {
-    return Favourite(
-      eventId: map['eventId'],
-    );
-  }
-}
-
-//

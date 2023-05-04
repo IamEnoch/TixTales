@@ -1,13 +1,17 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:tix_tales/services/events/event.dart';
+import 'package:tix_tales/services/users/ticket.dart';
 import 'package:tix_tales/src/Constants/app_assets.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 
 class TicketCard extends StatefulWidget {
-  const TicketCard({super.key});
+  final Ticket eventTicket;
+  final AppEvent event;
+  const TicketCard({
+    super.key,
+    required this.eventTicket,
+    required this.event,
+  });
 
   @override
   State<TicketCard> createState() => _TicketCardState();
@@ -56,7 +60,7 @@ class _TicketCardState extends State<TicketCard> {
                   ],
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.015),
-                Text('2 tickets',
+                Text('${widget.eventTicket.ticketsBought} tickets',
                     style: AppResources.appStyles.textStyles.bodySmall),
               ],
             ),

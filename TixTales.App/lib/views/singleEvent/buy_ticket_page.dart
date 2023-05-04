@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tix_tales/services/events/event.dart';
+import 'package:tix_tales/services/events/priceCategory.dart';
 import 'package:tix_tales/src/Constants/app_assets.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 
