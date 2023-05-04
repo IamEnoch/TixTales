@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tix_tales/services/events/event.dart';
-import 'package:tix_tales/services/users/ticket.dart';
+import 'package:tix_tales/services/events/ticket_details.dart';
 import 'package:tix_tales/src/Constants/app_assets.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 
 class TicketCard extends StatefulWidget {
-  final Ticket eventTicket;
-  final AppEvent event;
+  final TicketDetails ticketDetails;
   const TicketCard({
     super.key,
-    required this.eventTicket,
-    required this.event,
+    required this.ticketDetails,
   });
 
   @override
@@ -45,13 +42,13 @@ class _TicketCardState extends State<TicketCard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.event.eventName!,
+                          Text(widget.ticketDetails.eventName!,
                               style: AppResources
                                   .appStyles.textStyles.bodyDefaultBold),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.005,
                           ),
-                          Text(widget.event.eventDate!,
+                          Text(widget.ticketDetails.eventDate!,
                               style:
                                   AppResources.appStyles.textStyles.bodySmall),
                         ],
@@ -60,14 +57,14 @@ class _TicketCardState extends State<TicketCard> {
                   ],
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.015),
-                Text('${widget.eventTicket.ticketsBought} tickets',
+                Text('${widget.ticketDetails.ticketsBought} tickets',
                     style: AppResources.appStyles.textStyles.bodySmall),
               ],
             ),
           ),
           Expanded(
             child: Ink.image(
-              image: NetworkImage(widget.event.thumbNail!),
+              image: NetworkImage(widget.ticketDetails.thumbnail!),
               width: 10,
               height: MediaQuery.of(context).size.height * 0.125,
               fit: BoxFit.cover,
