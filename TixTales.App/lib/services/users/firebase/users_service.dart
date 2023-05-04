@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tix_tales/Logging/logger.dart';
+import 'package:tix_tales/services/eventTickets/firebase/tickets_exceptions.dart';
 import 'package:tix_tales/services/users/firebase/users_exceptions.dart';
+import 'package:tix_tales/services/users/ticket.dart';
 import 'package:tix_tales/services/users/user.dart';
 
 class UserService {
@@ -132,6 +134,26 @@ class UserService {
       print("The error is$e");
       throw CouldNotUpdateNoteExceptions();
     }
+  }
+
+  //get tickets information
+  Future<Iterable<Ticket>> getTickets() async {
+    var query = await specificQuery();
+    List<Ticket> tickets = [];
+
+    try {
+      for (var doc in query.docs) {
+        // Update the document
+        for (var ticket in doc.get('tickets')) {
+          tickets.add(Ticket.fromMap(ticket));
+        }
+      }
+    } catch (e) {
+      log.e('The error is ${tickets.length}');
+      throw CouldNotGetAllTicketsException;
+    }
+    log.d('The tickets are ${tickets.length}');
+    return tickets;
   }
 
   //Make user service singleton
