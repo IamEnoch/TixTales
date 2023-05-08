@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:tix_tales/Logging/logger.dart';
 import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/services/events/firebase/events_exceptions.dart';
@@ -33,7 +34,7 @@ class EventsService {
   }
 
   //getting events by user
-  Future<Iterable<TicketDetails?>> getPastEvent() async {
+  Future<Iterable<TicketDetails?>> getPastEvents() async {
     try {
       //get all bought tickets
       var tickets = await _userService.getTickets();
@@ -45,10 +46,51 @@ class EventsService {
 
       log.d('Check 2 issue $myEvents');
 
-      //DateTime.parse(element.eventDate!).isAfter(DateTime.now())
+      //DateFormat('E, MMM d · hh.mm a').parse(element.eventDate!).isAfter(DateTime.now())
       for (var singleEvent in myEvents) {
         for (var ticket in tickets) {
-          if (singleEvent.eventId == ticket.eventId) {
+          if (singleEvent.eventId == ticket.eventId &&
+              DateFormat('E, MMM d · hh.mm a')
+                  .parse(singleEvent.eventDate!)
+                  .isBefore(DateTime.now())) {
+            var check = TicketDetails(
+                eventName: singleEvent.eventName,
+                eventDate: singleEvent.eventDate,
+                ticketsBought: ticket.ticketsBought,
+                thumbnail: singleEvent.thumbNail);
+
+            log.d(myEvent);
+            myEvent.add(check);
+          }
+        }
+      }
+      return myEvent;
+    } catch (e) {
+      log.e('The error caught is $e');
+      throw CouldNotGetAllEventsException();
+    }
+  }
+
+  //getting events by user
+  Future<Iterable<TicketDetails?>> getUpcomingEvents() async {
+    try {
+      //get all bought tickets
+      var tickets = await _userService.getTickets();
+
+      List<TicketDetails> myEvent = [];
+      var myEvents = await events
+          .get()
+          .then((value) => value.docs.map((doc) => AppEvent.fromSnapshot(doc)));
+
+      log.d('Check 2 issue $myEvents');
+
+      //DateFormat('E, MMM d · hh.mm a').parse(element.eventDate!).isAfter(DateTime.now())
+      for (var singleEvent in myEvents) {
+        for (var ticket in tickets) {
+          if (singleEvent.eventId == ticket.eventId &&
+              DateFormat('E, MMM d · hh.mm a')
+                  .parse(singleEvent.eventDate!)
+                  .isAfter(DateTime.now())) {
             var check = TicketDetails(
                 eventName: singleEvent.eventName,
                 eventDate: singleEvent.eventDate,
