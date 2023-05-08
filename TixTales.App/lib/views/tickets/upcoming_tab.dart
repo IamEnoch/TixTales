@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:tix_tales/Logging/logger.dart';
-import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/services/events/firebase/events_service.dart';
 import 'package:tix_tales/services/events/ticket_details.dart';
-import 'package:tix_tales/services/users/firebase/users_service.dart';
-import 'package:tix_tales/services/users/ticket.dart';
 import 'package:tix_tales/widgets/ticket_card.dart';
 
 class UpcomingTab extends StatefulWidget {
@@ -16,18 +12,11 @@ class UpcomingTab extends StatefulWidget {
 }
 
 class _UpcomingTabState extends State<UpcomingTab> {
-  late final UserService _userService;
   late final EventsService _eventService;
-  late Future<Iterable<Ticket>>? eventTickets;
   final log = logger(UpcomingTab);
-
-  // AppEvent checkMethod()  {
-  //   return   _eventService.getEvent(eventId: '10').whenComplete(() => null);
-  // }
 
   @override
   void initState() {
-    _userService = UserService();
     _eventService = EventsService();
     super.initState();
   }
@@ -36,7 +25,7 @@ class _UpcomingTabState extends State<UpcomingTab> {
   Widget build(BuildContext context) {
     //log.d("IT is in build ${snapshot.data!.length}");
     return FutureBuilder(
-      future: _eventService.getPastEvent(),
+      future: _eventService.getUpcomingEvents(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
