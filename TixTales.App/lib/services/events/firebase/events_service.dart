@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:tix_tales/Logging/logger.dart';
@@ -110,8 +108,8 @@ class EventsService {
   }
 
   //make event service singleton
-  static final EventsService _shared = EventsService._internalInstance();
-  EventsService._internalInstance();
+  // static final EventsService _shared = EventsService._internalInstance();
+  // EventsService._internalInstance();
 
-  factory EventsService() => _shared;
+  // factory EventsService() => _shared;
 }
