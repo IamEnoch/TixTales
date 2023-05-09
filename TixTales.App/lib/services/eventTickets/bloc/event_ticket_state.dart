@@ -6,6 +6,10 @@ abstract class EventTicketState {
 }
 
 //Possible states for event ticket page
-class EventTicketStateLoaded extends EventTicketState {}
+class EventTicketStateLoaded extends EventTicketState {
+  const EventTicketStateLoaded();
+}
 
-class EvenTicketStateUnloaded extends EventTicketState {}
+class EvenTicketStateUnloaded extends EventTicketState {
+  const EvenTicketStateUnloaded();
+}
