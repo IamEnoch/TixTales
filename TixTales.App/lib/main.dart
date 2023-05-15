@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tix_tales/services/auth/bloc/auth_bloc.dart';
 import 'package:tix_tales/services/auth/bloc/auth_state.dart';
 import 'package:tix_tales/services/auth/firebase/firebase_auth_provider.dart';
-import 'package:tix_tales/services/eventTickets/bloc/event_ticket_bloc.dart';
-import 'package:tix_tales/services/events/firebase/events_service.dart';
 import 'package:tix_tales/src/Constants/routes.dart';
 import 'package:tix_tales/views/singleEvent/buy_ticket_page.dart';
 import 'package:tix_tales/views/home_page.dart';
