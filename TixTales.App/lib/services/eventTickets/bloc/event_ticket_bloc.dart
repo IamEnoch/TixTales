@@ -13,7 +13,7 @@ class EventTicketBloc extends Bloc<EventTicketEvent, EventTicketState> {
       Iterable<TicketDetails?> pastTickets =
           await eventsService.getPastEvents();
       if (pastTickets.isEmpty) {
-        emit(state);
+        emit(const EvenTicketStateUnloaded());
       } else {
         emit(const EventTicketStateLoaded());
       }
@@ -24,7 +24,7 @@ class EventTicketBloc extends Bloc<EventTicketEvent, EventTicketState> {
       Iterable<TicketDetails?> upcomingTickets =
           await eventsService.getUpcomingEvents();
       if (upcomingTickets.isEmpty) {
-        emit(state);
+        emit(const EvenTicketStateUnloaded());
       } else {
         emit(const EventTicketStateLoaded());
       }
