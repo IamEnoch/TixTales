@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tix_tales/Logging/logger.dart';
 import 'package:tix_tales/services/eventTickets/bloc/event_ticket_bloc.dart';
 import 'package:tix_tales/services/eventTickets/bloc/event_ticket_event.dart';
 import 'package:tix_tales/services/eventTickets/bloc/event_ticket_state.dart';
@@ -28,7 +27,7 @@ class UpcomingTab extends StatelessWidget {
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
-                //return const Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 case ConnectionState.done:
                   if (snapshot.hasData) {
                     final Iterable<TicketDetails?> allTickets = snapshot.data!;
