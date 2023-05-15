@@ -25,7 +25,7 @@ class PastTicketsTab extends StatelessWidget {
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
-                //return const Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 case ConnectionState.done:
                   if (snapshot.hasData) {
                     final Iterable<TicketDetails?> allTickets = snapshot.data!;
