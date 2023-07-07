@@ -129,10 +129,12 @@ class _MySmallCardState extends State<MySmallCard> {
                         eventId: jk['eventId']!,
                       );
                     },
-                    icon: Image.asset(AppAssets.heartIcon,
-                        color: isFavourite
-                            ? AppResources.appColors.iconRed
-                            : AppResources.appColors.iconGrey),
+                    icon: Image.asset(
+                      AppAssets.heartIcon,
+                      color: isFavourite
+                          ? AppResources.appColors.iconRed
+                          : AppResources.appColors.iconGrey,
+                    ),
                     padding: const EdgeInsets.all(0),
                     iconSize: 20,
                   ),
