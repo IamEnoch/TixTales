@@ -6,7 +6,7 @@ import 'package:tix_tales/services/users/firebase/users_service.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 import 'package:tix_tales/src/Constants/routes.dart';
-import 'package:tix_tales/widgets/event_card_small.dart';
+import 'package:tix_tales/widgets/event_card_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                 case ConnectionState.active:
                   if (snapshot.hasData) {
                     final Iterable<AppEvent>? allEvents = snapshot.data;
-                    if (allEvents != null) {
+                    if (allEvents!.isNotEmpty) {
                       print('Events: is full of info');
                       print('Events: ${allEvents.elementAt(3).eventName}');
                       return SafeArea(
@@ -282,8 +282,11 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ]),
                       );
-                    } else {
+                    } else if (allEvents!.isEmpty) {
                       print('Events is null');
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      print('Events is empty');
                       return const Center(child: CircularProgressIndicator());
                     }
                   } else {

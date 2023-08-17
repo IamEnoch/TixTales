@@ -23,7 +23,7 @@ List<T> convertDynamicListToListOfObjects<T>(
 //to desire date
 String desiredDate(String inputDateString) {
   DateTime dateTime = DateTime.parse(inputDateString);
-  String dateString = DateFormat('E, MMM d · hh.mm a').format(dateTime);
+  String dateString = DateFormat('E, MMM d · hh.mm a . y').format(dateTime);
   return dateString;
 }
 

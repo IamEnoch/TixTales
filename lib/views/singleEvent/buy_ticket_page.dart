@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tix_tales/Logging/logger.dart';
+import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/services/events/priceCategory.dart';
+import 'package:tix_tales/services/users/firebase/users_service.dart';
 import 'package:tix_tales/src/Constants/app_assets.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
+import 'package:tix_tales/widgets/single_ticket_widget.dart';
 
 class BuyTicketPage extends StatefulWidget {
   const BuyTicketPage({super.key});
@@ -14,6 +17,14 @@ class BuyTicketPage extends StatefulWidget {
 class _BuyTicketPageState extends State<BuyTicketPage> {
   double _bottomSheetPrice = 0;
   int _numberOfTickets = 0;
+  late final UserService _usersService;
+
+  @override
+  void initState() {
+    _usersService = UserService();
+
+    super.initState();
+  }
 
   //Define a callback function that takes an int parameter (the data you want to pass back)
   //and updates the state of the bottom sheet:
@@ -34,9 +45,17 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
   @override
   Widget build(BuildContext context) {
     final log = logger(BuyTicketPage);
-    //get event details
-    final List<PriceCategory> event =
-        ModalRoute.of(context)?.settings.arguments as List<PriceCategory>;
+
+    final Map<String, dynamic> arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+    final AppEvent eventDetails = arguments['event'] as AppEvent;
+
+    //get event price details
+    final List<PriceCategory> event = eventDetails.price!;
+
+    //get event id
+    final String eventId = eventDetails.eventId!;
 
     final screenHeight = MediaQuery.of(context).size.height;
     const bottomSheetHeight = 87.0;
@@ -118,7 +137,20 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                                     ),
                                   ),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      //use the updateUserTicketsInfo method to update the user tickets info
+                                      var ticketsInfo = <Map<String, String>>[];
+                                      ticketsInfo.add(
+                                        {
+                                          'eventId': eventId,
+                                          'tickets':
+                                              _numberOfTickets.toString(),
+                                        },
+                                      );
+
+                                      await _usersService.updateUserTicketsInfo(
+                                          ticketsInfo: ticketsInfo);
+                                    },
                                     child: Text(
                                       'Confirm',
                                       style: AppResources
@@ -213,7 +245,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.017,
                           ),
-                          SingleTicket(
+                          SingleTicketWidget(
                             myTicket: event.elementAt(index),
                             onDataChanged: updateBottomSheetData,
                             onNumberOfTicketsChanged: updateNumberOfTickets,
@@ -237,128 +269,4 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
       ),
     );
   }
-}
-
-class SingleTicket extends StatefulWidget {
-  final PriceCategory? myTicket;
-
-  //field for the callback function and call it whenever the data changes:
-  final Function(double) onDataChanged;
-
-  //field for the callback function and call it whenever the data changes(Number of tickets):
-  final Function(int) onNumberOfTicketsChanged;
-
-  const SingleTicket(
-      {super.key,
-      this.myTicket,
-      required this.onDataChanged,
-      required this.onNumberOfTicketsChanged});
-
-  @override
-  State<SingleTicket> createState() => _SingleTicketState();
-}
-
-class _SingleTicketState extends State<SingleTicket> {
-  int? selectedValue = 0;
-  late int eachTicketPrice = int.parse(widget.myTicket!.price!);
-  double _totalPriceOfTickets = 0;
-
-  //method to calculate total price
-  double totalPriceCalculate({
-    required int ticketPrice,
-    required int numberOfTickets,
-  }) {
-    int result = ticketPrice * numberOfTickets;
-    return result.toDouble();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              (widget.myTicket!.ticketType! == 'earlyBird')
-                  ? 'Early Bird'
-                  : (widget.myTicket!.ticketType! == 'general')
-                      ? 'General'
-                      : 'Second Release',
-              style: AppResources.appStyles.textStyles.bodyDefaultBold.copyWith(
-                color: AppResources.appColors.typographyDark,
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.013,
-            ),
-            Text(
-              '€${widget.myTicket!.price!}',
-              style: AppResources.appStyles.textStyles.bodySmall.copyWith(
-                color: AppResources.appColors.typographyGrey,
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.005,
-            ),
-            Text(
-              'Sales End On ${widget.myTicket!.salesEnd!} ',
-              style: AppResources.appStyles.textStyles.bodySmall.copyWith(
-                color: AppResources.appColors.typographyDark,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.41,
-        ),
-        DropdownButtonHideUnderline(
-          child: DropdownButton<int>(
-            style: AppResources.appStyles.textStyles.headineH6.copyWith(
-              color: AppResources.appColors.typographyDark,
-              fontSize: 18,
-            ),
-            value: selectedValue,
-            items: const [
-              0,
-              1,
-              2,
-            ].map((option) {
-              return DropdownMenuItem(
-                value: option,
-                child: Text("$option"),
-              );
-            }).toList(),
-            onChanged: (value) {
-              if (selectedValue != value) {
-                //Return the number of tickets from the dropdown button for each ticket
-                //and call the callback function:
-                setState(() {
-                  int myValue = value! - selectedValue!;
-                  selectedValue = value;
-                  _totalPriceOfTickets = totalPriceCalculate(
-                    numberOfTickets: myValue,
-                    ticketPrice: eachTicketPrice,
-                  );
-                  widget.onDataChanged(_totalPriceOfTickets);
-                  widget.onNumberOfTicketsChanged(myValue);
-                });
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-//Custom type to return the number of tickets and ticket type
-class NumberOfTickets {
-  final int numberOfTickets;
-  final String ticketType;
-
-  NumberOfTickets({
-    required this.numberOfTickets,
-    required this.ticketType,
-  });
 }

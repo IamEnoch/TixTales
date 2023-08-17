@@ -8,7 +8,7 @@ import 'package:tix_tales/services/events/ticket_details.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_assets.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
-import 'package:tix_tales/widgets/ticket_card.dart';
+import 'package:tix_tales/widgets/ticket_card_widget.dart';
 
 class UpcomingTab extends StatelessWidget {
   const UpcomingTab({super.key});
