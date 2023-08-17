@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tix_tales/Logging/logger.dart';
 import 'package:tix_tales/services/events/priceCategory.dart';
 import 'package:tix_tales/src/Constants/app_assets.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
@@ -12,6 +13,7 @@ class BuyTicketPage extends StatefulWidget {
 
 class _BuyTicketPageState extends State<BuyTicketPage> {
   double _bottomSheetPrice = 0;
+  int _numberOfTickets = 0;
 
   //Define a callback function that takes an int parameter (the data you want to pass back)
   //and updates the state of the bottom sheet:
@@ -21,20 +23,17 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
     });
   }
 
-  // //Get the number of tickets from the dropdown button for each ticket
-  // void calculateTotalPrice() {
-  //   int earlyBirdTickets = earlyBirdSelectedValue;
-  //   int generalTickets = generalSelectedValue;
-  //   int secondReleaseTickets = secondReleaseSelectedValue;
-  // }
+  //Define a callback function that takes an int parameter (the data you want to pass back)
+  //and updates number of tickets:
+  void updateNumberOfTickets(int data) {
+    setState(() {
+      _numberOfTickets += data;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    //Get the number of tickets from the dropdown button for each ticket.
-    int earlyBirdTickets = earlyBirdSelectedValue;
-    int generalTickets = generalSelectedValue;
-    int secondReleaseTickets = secondReleaseSelectedValue;
-
+    final log = logger(BuyTicketPage);
     //get event details
     final List<PriceCategory> event =
         ModalRoute.of(context)?.settings.arguments as List<PriceCategory>;
@@ -43,59 +42,127 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
     const bottomSheetHeight = 87.0;
     final maxScrollViewHeight = screenHeight - bottomSheetHeight;
 
-    return SafeArea(
-      child: Scaffold(
-        bottomSheet: Container(
-          padding: const EdgeInsetsDirectional.fromSTEB(15, 20.5, 15, 17.5),
-          alignment: Alignment.topLeft,
-          color: AppResources.appColors.globalGrey,
-          height: bottomSheetHeight,
-          child: Row(
-            children: [
-              Image.asset(
-                AppAssets.shoppingBagIcon,
-                width: 24,
-                height: 24,
+    return Scaffold(
+      bottomSheet: Container(
+        padding: const EdgeInsetsDirectional.fromSTEB(15, 20.5, 15, 17.5),
+        alignment: Alignment.topLeft,
+        color: AppResources.appColors.globalGrey,
+        height: bottomSheetHeight,
+        child: Row(
+          children: [
+            Image.asset(
+              AppAssets.shoppingBagIcon,
+              width: 24,
+              height: 24,
+              color: AppResources.appColors.globalDark,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.16,
+            ),
+            Text(
+              '€$_bottomSheetPrice',
+              style: AppResources.appStyles.textStyles.bodyDefaultBold.copyWith(
                 color: AppResources.appColors.globalDark,
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.16,
-              ),
-              Text(
-                '€$_bottomSheetPrice',
-                style:
-                    AppResources.appStyles.textStyles.bodyDefaultBold.copyWith(
-                  color: AppResources.appColors.globalDark,
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.06,
-              ),
-              Expanded(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.48,
-                  height: MediaQuery.of(context).size.width * 0.39,
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    style: AppResources.buttonStyles.buttonStyle(
-                      backgroundColor: AppResources.appColors.globalPrimary,
-                    ),
-                    child: Text(
-                      'Buy ',
-                      style: AppResources
-                          .appStyles.textStyles.componentsButtonDefault
-                          .copyWith(
-                        color: AppResources.appColors.typographyGlobalLight,
-                      ),
-                    ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.06,
+            ),
+            Expanded(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.48,
+                height: MediaQuery.of(context).size.width * 0.39,
+                child: OutlinedButton(
+                  onPressed: (_bottomSheetPrice == 0)
+                      ? null
+                      : () {
+                          log.d('The bottom sheet price is $_bottomSheetPrice');
+                          log.d('The number of tickets is $_numberOfTickets');
+
+                          //inflate a dialog box to confirm the purchase
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                  'Confirm Purchase',
+                                  style: AppResources
+                                      .appStyles.textStyles.bodyDefaultBold
+                                      .copyWith(
+                                    color:
+                                        AppResources.appColors.typographyDark,
+                                  ),
+                                ),
+                                content: Text(
+                                  'Are you sure you want to buy $_numberOfTickets tickets for €$_bottomSheetPrice?',
+                                  style: AppResources
+                                      .appStyles.textStyles.bodyDefaultBold
+                                      .copyWith(
+                                    color:
+                                        AppResources.appColors.typographyDark,
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      'Cancel',
+                                      style: AppResources
+                                          .appStyles.textStyles.bodyDefaultBold
+                                          .copyWith(
+                                        color: AppResources
+                                            .appColors.typographyDark,
+                                      ),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      'Confirm',
+                                      style: AppResources
+                                          .appStyles.textStyles.bodyDefaultBold
+                                          .copyWith(
+                                        color: AppResources
+                                            .appColors.typographyDark,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                  style: _numberOfTickets == 0
+                      ? AppResources.buttonStyles.buttonStyle(
+                          backgroundColor: AppResources.appColors.globalGrey,
+                        )
+                      : AppResources.buttonStyles.buttonStyle(
+                          backgroundColor: AppResources.appColors.globalPrimary,
+                        ),
+                  child: Text(
+                    'Buy ',
+                    style: _numberOfTickets == 0
+                        ? AppResources
+                            .appStyles.textStyles.componentsButtonDefault
+                            .copyWith(
+                                color: AppResources.appColors.typographyDark)
+                        : AppResources
+                            .appStyles.textStyles.componentsButtonDefault
+                            .copyWith(
+                            color: AppResources.appColors.typographyGlobalLight,
+                          ),
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
-        backgroundColor: AppResources.appColors.typographyGlobalLight,
-        body: ConstrainedBox(
+      ),
+      backgroundColor: AppResources.appColors.typographyGlobalLight,
+      body: SafeArea(
+        child: ConstrainedBox(
           constraints: BoxConstraints(maxHeight: maxScrollViewHeight),
           child: SingleChildScrollView(
             child: Center(
@@ -149,6 +216,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                           SingleTicket(
                             myTicket: event.elementAt(index),
                             onDataChanged: updateBottomSheetData,
+                            onNumberOfTicketsChanged: updateNumberOfTickets,
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.017,
@@ -177,7 +245,14 @@ class SingleTicket extends StatefulWidget {
   //field for the callback function and call it whenever the data changes:
   final Function(double) onDataChanged;
 
-  const SingleTicket({super.key, this.myTicket, required this.onDataChanged});
+  //field for the callback function and call it whenever the data changes(Number of tickets):
+  final Function(int) onNumberOfTicketsChanged;
+
+  const SingleTicket(
+      {super.key,
+      this.myTicket,
+      required this.onDataChanged,
+      required this.onNumberOfTicketsChanged});
 
   @override
   State<SingleTicket> createState() => _SingleTicketState();
@@ -195,17 +270,6 @@ class _SingleTicketState extends State<SingleTicket> {
   }) {
     int result = ticketPrice * numberOfTickets;
     return result.toDouble();
-  }
-
-  //method to get the number of tickets and return a custom type with number of tickets and ticket type
-  NumberOfTickets getNumberOfTickets({
-    required int numberOfTickets,
-    required String ticketType,
-  }) {
-    return NumberOfTickets(
-      numberOfTickets: numberOfTickets,
-      ticketType: ticketType,
-    );
   }
 
   @override
@@ -269,12 +333,6 @@ class _SingleTicketState extends State<SingleTicket> {
               if (selectedValue != value) {
                 //Return the number of tickets from the dropdown button for each ticket
                 //and call the callback function:
-                widget.onDataChanged(
-                  totalPriceCalculate(
-                    numberOfTickets: value!,
-                    ticketPrice: eachTicketPrice,
-                  ),
-                );
                 setState(() {
                   int myValue = value! - selectedValue!;
                   selectedValue = value;
@@ -283,6 +341,7 @@ class _SingleTicketState extends State<SingleTicket> {
                     ticketPrice: eachTicketPrice,
                   );
                   widget.onDataChanged(_totalPriceOfTickets);
+                  widget.onNumberOfTicketsChanged(myValue);
                 });
               }
             },
