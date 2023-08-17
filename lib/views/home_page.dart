@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/services/events/firebase/events_service.dart';
+import 'package:tix_tales/services/users/firebase/users_service.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 import 'package:tix_tales/src/Constants/routes.dart';
@@ -16,10 +18,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String? selectedValue;
   late final EventsService _eventsService;
+  late final UserService _usersService;
 
   @override
   void initState() {
     _eventsService = EventsService();
+    _usersService = UserService();
+    //Check to see first if the user exist before checking if the event is a favourite
+    _usersService.createNewUserIfNotExists();
+
     super.initState();
   }
 

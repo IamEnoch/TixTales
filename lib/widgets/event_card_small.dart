@@ -5,7 +5,6 @@ import 'package:logger/logger.dart';
 import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/services/users/favourite.dart';
 import 'package:tix_tales/services/users/firebase/users_service.dart';
-import 'package:tix_tales/services/users/user.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
 import 'package:tix_tales/src/Constants/routes.dart';

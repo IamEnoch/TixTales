@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/services/events/priceCategory.dart';
 import 'package:tix_tales/src/Constants/app_assets.dart';
 import 'package:tix_tales/src/Constants/app_resources.dart';
@@ -22,8 +21,20 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
     });
   }
 
+  // //Get the number of tickets from the dropdown button for each ticket
+  // void calculateTotalPrice() {
+  //   int earlyBirdTickets = earlyBirdSelectedValue;
+  //   int generalTickets = generalSelectedValue;
+  //   int secondReleaseTickets = secondReleaseSelectedValue;
+  // }
+
   @override
   Widget build(BuildContext context) {
+    //Get the number of tickets from the dropdown button for each ticket.
+    int earlyBirdTickets = earlyBirdSelectedValue;
+    int generalTickets = generalSelectedValue;
+    int secondReleaseTickets = secondReleaseSelectedValue;
+
     //get event details
     final List<PriceCategory> event =
         ModalRoute.of(context)?.settings.arguments as List<PriceCategory>;
@@ -186,6 +197,17 @@ class _SingleTicketState extends State<SingleTicket> {
     return result.toDouble();
   }
 
+  //method to get the number of tickets and return a custom type with number of tickets and ticket type
+  NumberOfTickets getNumberOfTickets({
+    required int numberOfTickets,
+    required String ticketType,
+  }) {
+    return NumberOfTickets(
+      numberOfTickets: numberOfTickets,
+      ticketType: ticketType,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -245,6 +267,14 @@ class _SingleTicketState extends State<SingleTicket> {
             }).toList(),
             onChanged: (value) {
               if (selectedValue != value) {
+                //Return the number of tickets from the dropdown button for each ticket
+                //and call the callback function:
+                widget.onDataChanged(
+                  totalPriceCalculate(
+                    numberOfTickets: value!,
+                    ticketPrice: eachTicketPrice,
+                  ),
+                );
                 setState(() {
                   int myValue = value! - selectedValue!;
                   selectedValue = value;
@@ -261,4 +291,15 @@ class _SingleTicketState extends State<SingleTicket> {
       ],
     );
   }
+}
+
+//Custom type to return the number of tickets and ticket type
+class NumberOfTickets {
+  final int numberOfTickets;
+  final String ticketType;
+
+  NumberOfTickets({
+    required this.numberOfTickets,
+    required this.ticketType,
+  });
 }

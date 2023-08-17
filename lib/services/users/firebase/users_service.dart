@@ -10,6 +10,7 @@ class UserService {
   final log = logger(UserService);
   final users = FirebaseFirestore.instance.collection('users');
 
+  //Get all users
   Future<QuerySnapshot<Object?>> specificQuery() async {
     return await FirebaseFirestore.instance
         .collection('users')
@@ -30,6 +31,7 @@ class UserService {
     final document = await users.add({
       'userId': ownerUserId,
       'favourites': [],
+      'tickets': [],
     });
     final fetchedNote = await document.get();
     return AppUser(
@@ -40,11 +42,27 @@ class UserService {
     );
   }
 
+  //Method to create a new user if the user does not exist in order to favourite
+  //an event and buy tickets
+  Future<void> createNewUserIfNotExists() async {
+    try {
+      var check = await specificQuery();
+      if (check.docs.isEmpty) {
+        await createNewUser(
+            ownerUserId: FirebaseAuth.instance.currentUser!.uid);
+      }
+    } catch (e) {
+      print("The error is$e");
+      throw CouldNotCreateUserException();
+    }
+  }
+
   //Is favourite or not method
   Future<bool> isFavourite({
     required String eventId,
   }) async {
     var check = await specificQuery();
+
     bool containsValueToCheck = false;
 
     for (var doc in check.docs) {
