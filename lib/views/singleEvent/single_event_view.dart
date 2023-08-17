@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:tix_tales/services/events/event.dart';
 import 'package:tix_tales/src/Constants/all_constant_imports.dart';
